@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0099)file:///C:/Users/Sonay%20Rolla%20Moggi/Documents/%E6%9C%9F%E6%9C%AB%E5%A0%B1%E5%91%8A/11/index.html -->
-<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>族語(三) 報告與測驗時程表 (12/19整併版)</title>
+    <title>族語(三) 報告與測驗時程表 (雙語版) / Schedule (Bilingual)</title>
     <style>
         :root {
             --primary-color: #00695c;
@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px; /* 稍微加寬以容納雙語 */
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -43,6 +43,13 @@
             margin: 0;
             font-size: 1.8rem;
         }
+        
+        h1 .en {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-top: 5px;
+        }
 
         .subtitle {
             color: #666;
@@ -50,6 +57,15 @@
             margin-top: 5px;
         }
 
+        /* 雙語文字樣式 */
+        .en-text {
+            display: block;
+            font-size: 0.85em;
+            color: #666;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        
         /* 摘要資訊卡 */
         .summary-card {
             display: flex;
@@ -64,7 +80,7 @@
             padding: 15px;
             border-radius: var(--border-radius);
             border-left: 4px solid var(--primary-color);
-            min-width: 180px;
+            min-width: 200px;
         }
 
         .card h3 { margin: 0 0 5px 0; font-size: 1rem; color: var(--primary-color); }
@@ -126,6 +142,10 @@
         details[open] summary::after {
             color: white;
         }
+        
+        details[open] summary .en-text {
+            color: #e0f2f1; /* 展開時英文反白變淺色 */
+        }
 
         /* 表格樣式 */
         .table-wrapper {
@@ -135,13 +155,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
+            min-width: 700px;
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid #eee;
+            vertical-align: middle;
         }
 
         th {
@@ -149,6 +170,7 @@
             color: #555;
             font-weight: 600;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         tr:last-child td {
@@ -166,16 +188,18 @@
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
         }
 
         .badge.mid { background-color: #fff3e0; color: #ef6c00; border: 1px solid #ffe0b2; }
         .badge.final { background-color: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
-        .badge.new { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-
+        
         .time-col {
             font-family: 'Consolas', monospace;
             font-weight: bold;
             color: var(--primary-color);
+            white-space: nowrap;
         }
         
         .special-row {
@@ -202,116 +226,131 @@
 
     <div class="container">
         <header>
-            <h1>族語(三) 報告與測驗時程表</h1>
-            <div class="subtitle">更新日期：2025/12/05 | 狀態：12/19 集中報告 (1-15號)</div>
+            <h1>族語(三) 報告與測驗時程表<span class="en">Indigenous Language (III) Schedule</span></h1>
+            <div class="subtitle">更新 / Updated: 2025/12/05 | 狀態：12/19 集中報告 (1-15號) / Status: Consolidated Midterms on 12/19</div>
         </header>
 
         <div class="summary-card">
             <div class="card">
-                <h3>第一週 (12/19)</h3>
-                <p>🕒 14:10 開始<br>📝 期中報告 (1-15號)<br>⚡ 每人 11 分鐘</p>
+                <h3>第一週 (12/19)<br><span class="en-text">Week 1 (Dec 19)</span></h3>
+                <p>🕒 14:10 開始 / Start<br>📝 期中報告 (1-15號)<br><span class="en-text">Midterm (No. 1-15)</span><br>⚡ 11 分/人 (min/person)</p>
             </div>
             <div class="card">
-                <h3>第二週 (01/02)</h3>
-                <p>🕒 <strong>13:10 開始</strong><br>📝 期末報告 (1-8號)<br>⚡ 每人 20 分鐘</p>
+                <h3>第二週 (01/02)<br><span class="en-text">Week 2 (Jan 02)</span></h3>
+                <p>🕒 <strong>13:10 開始 / Start</strong><br>📝 期末報告 (1-8號)<br><span class="en-text">Final (No. 1-8)</span><br>⚡ 20 分/人 (min/person)</p>
             </div>
             <div class="card">
-                <h3>第三週 (01/09)</h3>
-                <p>🕒 <strong>13:10 開始</strong><br>📝 期末報告 (9-15號)<br>⚡ 每人 20 分鐘</p>
+                <h3>第三週 (01/09)<br><span class="en-text">Week 3 (Jan 09)</span></h3>
+                <p>🕒 <strong>13:10 開始 / Start</strong><br>📝 期末報告 (9-15號)<br><span class="en-text">Final (No. 9-15)</span><br>⚡ 20 分/人 (min/person)</p>
             </div>
         </div>
 
-        <details open="">
-            <summary>📅 第一週：12 月 19 日 (14:10 開始) - 期中報告 (1-15號)</summary>
+        <details open>
+            <summary>
+                <div>
+                    📅 第一週：12 月 19 日 (14:10 開始) - 期中報告 (1-15號)
+                    <span class="en-text">Week 1: Dec 19 (Start 14:10) - Midterm Presentation (No. 1-15)</span>
+                </div>
+            </summary>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>狀態 (可編輯)</th>
-                            <th>序號</th>
-                            <th>姓名 (可編輯)</th>
-                            <th>族語分組 (可編輯)</th>
-                            <th>時間 (11分/人)</th>
+                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
+                            <th>序號<br><span class="en-text">No.</span></th>
+                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
+                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
+                            <th>時間 (11分/人)<br><span class="en-text">Time (11m)</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- 1-8 號 -->
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>1</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美</td><td class="time-col">14:10 - 14:21</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:21 - 14:32</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:32 - 14:43</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:43 - 14:54</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:54 - 15:05</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美</td><td class="time-col">15:05 - 15:16</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>7</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣</td><td class="time-col">15:16 - 15:27</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>8</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅</td><td class="time-col">15:27 - 15:38</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>1</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣<br><span class="en-text">Truku</span></td><td class="time-col">14:10 - 14:21</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:21 - 14:32</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:32 - 14:43</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:43 - 14:54</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:54 - 15:05</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:05 - 15:16</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>7</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:16 - 15:27</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>8</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:27 - 15:38</td></tr>
                         
                         <!-- 分隔線/換場 -->
-                        <tr class="special-row"><td colspan="5">換場 / 休息 (15:38 - 15:40)</td></tr>
+                        <tr class="special-row"><td colspan="5">換場 / 休息 (15:38 - 15:40)<br><span class="en-text">Transition / Break</span></td></tr>
 
                         <!-- 9-15 號 (接續) -->
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>9</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美</td><td class="time-col">15:40 - 15:51</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">秀姑巒阿美</td><td class="time-col">15:51 - 16:02</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>11</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美</td><td class="time-col">16:02 - 16:13</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>12</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣</td><td class="time-col">16:13 - 16:24</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>13</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語</td><td class="time-col">16:24 - 16:35</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語</td><td class="time-col">16:35 - 16:46</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中</span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語</td><td class="time-col">16:46 - 16:57</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>9</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:40 - 15:51</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:51 - 16:02</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>11</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅<br><span class="en-text">Sakizaya</span></td><td class="time-col">16:02 - 16:13</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>12</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣<br><span class="en-text">N. Paiwan</span></td><td class="time-col">16:13 - 16:24</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>13</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語<br><span class="en-text">C. Paiwan</span></td><td class="time-col">16:24 - 16:35</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">16:35 - 16:46</td></tr>
+                        <tr><td><span class="badge mid" contenteditable="true">期中<br><span class="en-text">Midterm</span></span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">16:46 - 16:57</td></tr>
                         
-                        <tr class="special-row"><td colspan="5">本日課程結束 (約 17:00)</td></tr>
+                        <tr class="special-row"><td colspan="5">本日課程結束 (約 17:00)<br><span class="en-text">Class Dismissed (~17:00)</span></td></tr>
                     </tbody>
                 </table>
             </div>
         </details>
 
-        <details open="">
-            <summary>📅 第二週：01 月 02 日 (⚠️ 13:10 開始) - 期末報告 (1-8號)</summary>
+        <details>
+            <summary>
+                <div>
+                    📅 第二週：01 月 02 日 (⚠️ 13:10 開始) - 期末報告 (1-8號)
+                    <span class="en-text">Week 2: Jan 02 (Start 13:10) - Final Presentation (No. 1-8)</span>
+                </div>
+            </summary>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>狀態 (可編輯)</th>
-                            <th>序號</th>
-                            <th>姓名 (可編輯)</th>
-                            <th>族語分組 (可編輯)</th>
-                            <th>時間 (20分/人)</th>
+                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
+                            <th>序號<br><span class="en-text">No.</span></th>
+                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
+                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
+                            <th>時間 (20分/人)<br><span class="en-text">Time (20m)</span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>1</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣</td><td class="time-col">13:10 - 13:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美</td><td class="time-col">13:30 - 13:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美</td><td class="time-col">13:50 - 14:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:10 - 14:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美</td><td class="time-col">14:30 - 14:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美</td><td class="time-col">14:50 - 15:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>7</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅</td><td class="time-col">15:10 - 15:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>8</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語</td><td class="time-col">15:30 - 15:50</td></tr>
-                         <tr class="special-row"><td colspan="5">本日課程結束 (約 15:50)</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>1</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣<br><span class="en-text">Truku</span></td><td class="time-col">13:10 - 13:30</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">13:30 - 13:50</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">13:50 - 14:10</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:10 - 14:30</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美<br><span class="en-text">Coastal Amis</span></td><td class="time-col">14:30 - 14:50</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">14:50 - 15:10</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>7</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:10 - 15:30</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>8</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">15:30 - 15:50</td></tr>
+                         <tr class="special-row"><td colspan="5">本日課程結束 (約 15:50)<br><span class="en-text">Class Dismissed (~15:50)</span></td></tr>
                     </tbody>
                 </table>
             </div>
         </details>
 
-        <details open="">
-            <summary>📅 第三週：01 月 09 日 (⚠️ 13:10 開始) - 期末報告 (9-15號)</summary>
+        <details>
+            <summary>
+                <div>
+                    📅 第三週：01 月 09 日 (⚠️ 13:10 開始) - 期末報告 (9-15號)
+                    <span class="en-text">Week 3: Jan 09 (Start 13:10) - Final Presentation (No. 9-15)</span>
+                </div>
+            </summary>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>狀態 (可編輯)</th>
-                            <th>序號</th>
-                            <th>姓名 (可編輯)</th>
-                            <th>族語分組 (可編輯)</th>
-                            <th>時間 (20分/人)</th>
+                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
+                            <th>序號<br><span class="en-text">No.</span></th>
+                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
+                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
+                            <th>時間 (20分/人)<br><span class="en-text">Time (20m)</span></th>
                         </tr>
                     </thead>
                     <tbody>
-                         <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>9</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美</td><td class="time-col">13:10 - 13:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">秀姑巒阿美</td><td class="time-col">13:30 - 13:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>11</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美</td><td class="time-col">13:50 - 14:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>12</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美南勢阿美</td><td class="time-col">14:10 - 14:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>13</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣</td><td class="time-col">14:30 - 14:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語</td><td class="time-col">14:50 - 15:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末</span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語</td><td class="time-col">15:10 - 15:30</td></tr>
+                         <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>9</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">13:10 - 13:30</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">南勢阿美<br><span class="en-text">Nanshi Amis</span></td><td class="time-col">13:30 - 13:50</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>11</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅<br><span class="en-text">Sakizaya</span></td><td class="time-col">13:50 - 14:10</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>12</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣<br><span class="en-text">N. Paiwan</span></td><td class="time-col">14:10 - 14:30</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>13</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語<br><span class="en-text">C. Paiwan</span></td><td class="time-col">14:30 - 14:50</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">14:50 - 15:10</td></tr>
+                        <tr><td><span class="badge final" contenteditable="true">期末<br><span class="en-text">Final</span></span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">15:10 - 15:30</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -322,9 +361,9 @@
     <script>
         document.querySelectorAll('summary').forEach(el => {
             el.addEventListener('click', function(e) {
-                console.log('Toggled: ' + this.innerText);
+                console.log('Toggled: ' + this.innerText.split('\n')[0]);
             });
         });
     </script>
-
-</body></html>
+</body>
+</html>
