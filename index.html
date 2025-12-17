@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 950px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -186,7 +186,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 700px;
+            min-width: 800px;
         }
 
         th, td {
@@ -250,6 +250,227 @@
             background-color: white;
         }
 
+        /* 下拉選單與按鈕樣式 */
+        .topic-selector {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 0.9rem;
+            margin-right: 5px;
+            max-width: 140px;
+        }
+        
+        .level-selector {
+            border-color: #b2dfdb;
+            background-color: #f0faff;
+            color: #00695c;
+            font-weight: 500;
+        }
+
+        .btn-view {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-view:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Modal 樣式 */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%; 
+            max-width: 700px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background-color: var(--secondary-color);
+            border-bottom: 1px solid #ddd;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .modal-header h3 { margin: 0; color: var(--primary-color); }
+
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-btn:hover { color: var(--primary-color); }
+
+        .modal-body {
+            padding: 20px;
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 文章顯示區塊樣式 */
+        .text-content-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', sans-serif;
+            color: #2c3e50;
+            line-height: 1.8;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .text-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            display: block;
+            border-bottom: 2px solid #e0f2f1;
+            padding-bottom: 3px;
+        }
+        
+        /* 說明文字樣式 */
+        .reading-meta-info {
+            font-size: 0.9rem;
+            color: #d81b60;
+            font-weight: bold;
+            margin-bottom: 8px;
+            background-color: #fff0f5;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 朗讀圖片樣式 */
+        .reading-passage-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        /* 連結輸入與按鈕區域 */
+        .link-control-area {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            align-items: center;
+            background-color: #f0faff;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #b3e5fc;
+        }
+        
+        .link-input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .link-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .audio-link-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+        }
+        .audio-link-btn:hover {
+            background-color: #004d40;
+        }
+
+        .topic-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .modal-footer {
+            padding: 15px;
+            text-align: right;
+            border-top: 1px solid #eee;
+            flex-shrink: 0;
+        }
+        
+        .modal-footer button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -284,6 +505,7 @@
             </div>
         </div>
 
+        <!-- 12月19日 -->
         <details open>
             <summary>
                 <div>
@@ -295,42 +517,23 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
+                            <th>狀態<br><span class="en-text">Status</span></th>
                             <th>序號<br><span class="en-text">No.</span></th>
                             <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
                             <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
+                            <th>認證級別<br><span class="en-text">Level</span></th>
+                            <th>測驗題目 (請依方言選擇)<br><span class="en-text">Topic Select</span></th>
                             <th>時間 (11分/人)<br><span class="en-text">Time (11m)</span></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- 1-8 號 -->
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>1</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">14:10 - 14:21</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:21 - 14:32</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:32 - 14:43</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:43 - 14:54</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:54 - 15:05</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">15:05 - 15:16</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>7</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣<br><span class="en-text">Truku</span></td><td class="time-col">15:16 - 15:27</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>8</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅<br><span class="en-text">Sakizaya</span></td><td class="time-col">15:27 - 15:38</td></tr>
-                        
-                        <!-- 分隔線/換場 -->
-                        <tr class="special-row"><td colspan="5">換場 / 休息 (15:38 - 15:40)<br><span class="en-text">Transition / Break</span></td></tr>
-
-                        <!-- 9-15 號 (接續) -->
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>9</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">15:40 - 15:51</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">秀姑巒阿美<br><span class="en-text">Siwkolang 'Amis</span></td><td class="time-col">15:51 - 16:02</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>11</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">16:02 - 16:13</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>12</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣<br><span class="en-text">N. Paiwan</span></td><td class="time-col">16:13 - 16:24</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>13</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語<br><span class="en-text">C. Paiwan</span></td><td class="time-col">16:24 - 16:35</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">16:35 - 16:46</td></tr>
-                        <tr><td><span class="badge mid" contenteditable="true">期中+口說<br><span class="en-text">Midterm+Oral</span></span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">16:46 - 16:57</td></tr>
-                        
-                        <tr class="special-row"><td colspan="5">本日課程結束 (約 17:00)<br><span class="en-text">Class Dismissed (~17:00)</span></td></tr>
+                    <tbody id="midterm-tbody">
+                        <!-- JS 將自動填入此處內容 -->
                     </tbody>
                 </table>
             </div>
         </details>
 
+        <!-- 1月2日 -->
         <details>
             <summary>
                 <div>
@@ -358,38 +561,7 @@
                         <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">14:50 - 15:10</td></tr>
                         <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>7</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語<br><span class="en-text">C. Paiwan</span></td><td class="time-col">15:10 - 15:30</td></tr>
                         <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>8</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅<br><span class="en-text">Sakizaya</span></td><td class="time-col">15:30 - 15:50</td></tr>
-                         <tr class="special-row"><td colspan="5">本日課程結束 (約 15:50)<br><span class="en-text">Class Dismissed (~15:50)</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
-
-        <details>
-            <summary>
-                <div>
-                    📅 115年 1月 9日 (⚠️ 13:10 開始) - 期末報告及口說測驗 (9-15號)
-                    <span class="en-text">Jan 09, 2026 (Start 13:10) - Final Presentation & Oral Test (No. 9-15)</span>
-                </div>
-            </summary>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
-                            <th>序號<br><span class="en-text">No.</span></th>
-                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
-                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
-                            <th>時間 (20分/人)<br><span class="en-text">Time (20m)</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>9</td><td contenteditable="true">余晨儀</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">13:10 - 13:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>10</td><td contenteditable="true">王妤君</td><td contenteditable="true">秀姑巒阿美<br><span class="en-text">Siwkolan Amis</span></td><td class="time-col">13:30 - 13:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>11</td><td contenteditable="true">林詩晨</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">13:50 - 14:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>12</td><td contenteditable="true">呂頌恩</td><td contenteditable="true">北排灣<br><span class="en-text">N. Paiwan</span></td><td class="time-col">14:10 - 14:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>13</td><td contenteditable="true">林芳宇</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">14:30 - 14:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>14</td><td contenteditable="true">蘇邱立宏</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">14:50 - 15:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>15</td><td contenteditable="true">胡弘易</td><td contenteditable="true">郡群布農語<br><span class="en-text">Bunun</span></td><td class="time-col">15:10 - 15:30</td></tr>
+                        <tr class="special-row"><td colspan="5">本日課程結束 (約 15:50)<br><span class="en-text">Class Dismissed (~15:50)</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -397,14 +569,289 @@
 
     </div>
 
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">題目詳情</h3>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <span id="modal-badge" class="topic-badge"></span>
+                <span id="modal-student-info" style="display:block; font-size: 0.8rem; color: #666; margin-bottom: 5px;"></span>
+                
+                <!-- 文章顯示區域 -->
+                <div class="text-content-box">
+                    <span class="text-label">朗讀文章 / Reading Passage:</span>
+                    <!-- 說明欄位 (階級/課數) -->
+                    <p id="modal-reading-desc" class="reading-meta-info"></p>
+                    
+                    <!-- 文章圖片 -->
+                    <img id="modal-reading-img" class="reading-passage-img" src="" style="display:none;" onerror="this.style.display='none'">
+                    
+                    <!-- 朗讀圖片連結輸入控制 (新增) -->
+                    <div class="link-control-area" style="background-color: #fff8e1; border-color: #ffe082;">
+                        <input type="text" id="modal-reading-img-input" class="link-input" placeholder="貼上朗讀圖片網址 / Paste Reading Image URL">
+                        <button class="audio-link-btn" style="background-color: #ff8f00;" onclick="updateReadingImage()">
+                            🖼️ 顯示 Show
+                        </button>
+                    </div>
+
+                    <span id="modal-text"></span>
+                </div>
+                
+                <!-- 音檔網址輸入與跳轉按鈕 -->
+                <div class="link-control-area">
+                    <input type="text" id="modal-link-input" class="link-input" placeholder="請輸入音檔連結 / Paste Audio Link...">
+                    <button id="modal-link-btn" class="audio-link-btn" onclick="navigateToLink()">
+                        🎧 前往 Go
+                    </button>
+                </div>
+
+                <div style="border-top: 1px dashed #ddd; margin: 15px 0;"></div>
+
+                <span class="text-label">看圖表達 / Picture Description:</span>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
+                    <span class="en-text">Please refer to the image below for the Picture Description test.</span>
+                </p>
+                
+                <!-- 題目圖片連結輸入控制 (新增) -->
+                <div class="link-control-area" style="background-color: #e8f5e9; border-color: #a5d6a7;">
+                    <input type="text" id="modal-topic-img-input" class="link-input" placeholder="貼上題目圖片網址 / Paste Topic Image URL">
+                    <button class="audio-link-btn" style="background-color: #2e7d32;" onclick="updateTopicImage()">
+                        🖼️ 顯示 Show
+                    </button>
+                </div>
+
+                <img id="modal-img" src="" alt="Topic Image" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Image+Not+Found';">
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()">確認 OK</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.querySelectorAll('summary').forEach(el => {
-            el.addEventListener('click', function(e) {
-                console.log('Toggled: ' + this.innerText.split('\n')[0]);
+        // ==========================================
+        //  1. 圖片組合 (Topic Set)
+        // ==========================================
+        const topics = {
+            A: { 
+                code: "Topic Set A", 
+                // 👇 請在此處貼上「看圖表達」的圖片網址
+                img: "https://res.cloudinary.com/dm1ksvptk/image/upload/v1765898898/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-12-16_232600_a2yd2v.png", 
+                desc: "題目組合 A",
+                defaultText: "（這是預設文章 A...）"
+            },
+            B: { 
+                code: "Topic Set B", 
+                // 👇 請在此處貼上「看圖表達」的圖片網址
+                img: "./images/topic2.jpg", 
+                desc: "題目組合 B",
+                defaultText: "（這是預設文章 B...）"
+            },
+            C: { 
+                code: "Topic Set C", 
+                // 👇 請在此處貼上「看圖表達」的圖片網址
+                img: "./images/topic3.jpg", 
+                desc: "題目組合 C",
+                defaultText: "（這是預設文章 C...）"
+            }
+        };
+
+        // ==========================================
+        //  2. 朗讀文章資料庫 (含連結、圖片、說明)
+        // ==========================================
+        const examTexts = {
+            // 南勢阿美 - 中高級
+            "Nanshi_High-Intermediate": {
+                text: "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay.",
+                // 👇 請在此處貼上「音檔/文章」的超連結
+                url: "https://web.klokah.tw/",
+                readingDesc: "中高級 / 第 8 階第 3 課", 
+                // 👇 請在此處貼上「朗讀文章」的圖片網址
+                readingImg: "" 
+            },
+            
+            // 預設樣板
+            "default": {
+                text: "（尚未設定此語別文章，請依圖片進行測驗）",
+                url: "",
+                readingDesc: "級別 / 課數待定",
+                readingImg: "" 
+            }
+        };
+
+        // 3. 定義 12/19 學生資料
+        const midtermData = [
+            { id: 1, name: "林芳宇", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "14:10 - 14:21", level: "High-Intermediate" },
+            { id: 2, name: "廖于寰", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:21 - 14:32", level: "High-Intermediate" },
+            { id: 3, name: "董韋誠", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:32 - 14:43", level: "High-Intermediate" },
+            { id: 4, name: "林子嫣", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:43 - 14:54", level: "Intermediate" },
+            { id: 5, name: "Malinda", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:54 - 15:05", level: "High-Intermediate", customStatus: "對話測驗", customStatusEn: "Conversation" },
+            { id: 6, name: "魏翔慧", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "15:05 - 15:16", level: "High-Intermediate" },
+            { id: 7, name: "黃湘茹", group: "太魯閣<br><span class='en-text'>Truku</span>", langCode: "Truku", time: "15:16 - 15:27", level: "High-Intermediate" },
+            { id: 8, name: "林子嫈", group: "撒奇萊雅<br><span class='en-text'>Sakizaya</span>", langCode: "Sakizaya", time: "15:27 - 15:38", level: "High-Intermediate" },
+            // Break
+            { id: 9, name: "林詩晨", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "15:40 - 15:51", level: "High-Intermediate" },
+            { id: 10, name: "王妤君", group: "秀姑巒阿美<br><span class='en-text'>Siwkolang 'Amis</span>", langCode: "Siwkolang", time: "15:51 - 16:02", level: "High-Intermediate" },
+            { id: 11, name: "余晨儀", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "16:02 - 16:13", level: "High-Intermediate" },
+            { id: 12, name: "呂頌恩", group: "北排灣<br><span class='en-text'>N. Paiwan</span>", langCode: "Paiwan", time: "16:13 - 16:24", level: "High-Intermediate" },
+            { id: 13, name: "楊舒閑", group: "中排灣語<br><span class='en-text'>C. Paiwan</span>", langCode: "Paiwan", time: "16:24 - 16:35", level: "High-Intermediate" },
+            { id: 14, name: "蘇邱立宏", group: "郡群布農語<br><span class='en-text'>Bunun</span>", langCode: "Bunun", time: "16:35 - 16:46", level: "Intermediate" },
+            { id: 15, name: "胡弘易", group: "郡群布農語<br><span class='en-text'>Bunun</span>", langCode: "Bunun", time: "16:46 - 16:57", level: "High-Intermediate" }
+        ];
+
+        // 4. 渲染 12/19 表格
+        function renderMidterm() {
+            const tbody = document.getElementById('midterm-tbody');
+            let html = '';
+
+            midtermData.forEach((student, index) => {
+                let defaultTopic = 'A';
+                if (student.id >= 6 && student.id <= 10) defaultTopic = 'B';
+                if (student.id >= 11) defaultTopic = 'C';
+
+                if (index === 8) {
+                    html += `<tr class="special-row"><td colspan="7">換場 / 休息 (15:38 - 15:40)<br><span class="en-text">Transition / Break</span></td></tr>`;
+                }
+
+                const statusText = student.customStatus || "期中+口說";
+                const statusEn = student.customStatusEn || "Midterm+Oral";
+
+                html += `
+                    <tr>
+                        <td><span class="badge mid" contenteditable="true">${statusText}<br><span class="en-text">${statusEn}</span></span></td>
+                        <td>${student.id}</td>
+                        <td contenteditable="true">${student.name}</td>
+                        <td contenteditable="true">${student.group}</td>
+                        <td>
+                             <select id="select-level-${student.id}" class="topic-selector level-selector">
+                                <option value="Novice" ${student.level === 'Novice' ? 'selected' : ''}>初級 / Novice</option>
+                                <option value="Intermediate" ${student.level === 'Intermediate' ? 'selected' : ''}>中級 / Intermediate</option>
+                                <option value="High-Intermediate" ${student.level === 'High-Intermediate' ? 'selected' : ''}>中高級 / High-Int.</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <select id="select-topic-${student.id}" class="topic-selector">
+                                    <option value="A" ${defaultTopic === 'A' ? 'selected' : ''}>題目 A</option>
+                                    <option value="B" ${defaultTopic === 'B' ? 'selected' : ''}>題目 B</option>
+                                    <option value="C" ${defaultTopic === 'C' ? 'selected' : ''}>題目 C</option>
+                                </select>
+                                <button class="btn-view" onclick="openSelectedModal(${student.id})">
+                                    檢視 View
+                                </button>
+                            </div>
+                        </td>
+                        <td class="time-col">${student.time}</td>
+                    </tr>
+                `;
             });
-        });
+            
+            html += `<tr class="special-row"><td colspan="7">本日課程結束 (約 17:00)<br><span class="en-text">Class Dismissed (~17:00)</span></td></tr>`;
+            tbody.innerHTML = html;
+        }
+
+        // 5. Modal 控制
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalText = document.getElementById('modal-text');
+        
+        // 連結與說明欄位
+        const modalLinkInput = document.getElementById('modal-link-input'); // 音檔連結輸入框
+        const modalReadingImgInput = document.getElementById('modal-reading-img-input'); // 朗讀圖片連結輸入框
+        const modalTopicImgInput = document.getElementById('modal-topic-img-input'); // 題目圖片連結輸入框
+        
+        const modalStudentInfo = document.getElementById('modal-student-info');
+        
+        const modalReadingDesc = document.getElementById('modal-reading-desc');
+        const modalReadingImg = document.getElementById('modal-reading-img');
+
+        function openSelectedModal(studentId) {
+            const student = midtermData.find(s => s.id === studentId);
+            
+            const topicSelect = document.getElementById(`select-topic-${studentId}`);
+            const levelSelect = document.getElementById(`select-level-${studentId}`);
+            const topicKey = topicSelect.value;
+            const levelKey = levelSelect.value;
+            
+            const topic = topics[topicKey];
+            
+            modalImg.src = topic.img;
+            modalTopicImgInput.value = topic.img || ""; // 填入題目圖片網址
+
+            modalBadge.innerText = `${topic.code} - ${topic.desc}`;
+            modalStudentInfo.innerText = `${student.name} (${student.langCode} - ${levelKey})`;
+
+            // 智慧判斷
+            const textKey = `${student.langCode}_${levelKey}`;
+            const examData = examTexts[textKey] || { text: topic.defaultText, url: "", readingDesc: "", readingImg: "" };
+
+            // 1. 填入文字
+            modalText.innerText = examData.text;
+
+            // 2. 填入音檔網址輸入框
+            modalLinkInput.value = examData.url || "";
+            
+            // 3. 填入朗讀圖片網址輸入框
+            modalReadingImgInput.value = examData.readingImg || "";
+
+            // 4. 處理朗讀圖片 (若有則顯示，無則隱藏)
+            updateReadingImage(); // 呼叫更新函式
+
+            // 5. 處理朗讀說明 (若有則顯示，無則隱藏)
+            if (examData.readingDesc && examData.readingDesc !== "") {
+                modalReadingDesc.innerText = examData.readingDesc;
+                modalReadingDesc.style.display = "inline-block";
+            } else {
+                modalReadingDesc.style.display = "none";
+            }
+            
+            modal.style.display = "block";
+        }
+
+        // 跳轉音檔函式
+        function navigateToLink() {
+            const url = modalLinkInput.value.trim();
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                alert("請先輸入網址！\nPlease enter a URL first.");
+            }
+        }
+        
+        // 更新朗讀圖片函式
+        function updateReadingImage() {
+            const url = modalReadingImgInput.value.trim();
+            if (url) {
+                modalReadingImg.src = url;
+                modalReadingImg.style.display = 'block';
+            } else {
+                modalReadingImg.style.display = 'none';
+            }
+        }
+
+        // 更新題目圖片函式 (新增)
+        function updateTopicImage() {
+            const url = modalTopicImgInput.value.trim();
+            if (url) {
+                modalImg.src = url;
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        renderMidterm();
     </script>
 </body>
-
 </html>
-
