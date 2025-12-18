@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>族語(三) 報告與測驗時程表 (Bilingual Edition)</title>
+    <title>族語(三) 報告與測驗時程表 (Bilingual & Stable Edition)</title>
     <style>
         :root {
             --primary-color: #00695c;
@@ -41,8 +41,6 @@
         }
 
         h1 { color: var(--primary-color); margin: 0; font-size: 1.8rem; }
-        .subtitle { color: #666; font-size: 0.9rem; margin-top: 5px; }
-
         .en-inline {
             display: block;
             font-size: 0.85rem;
@@ -51,15 +49,19 @@
             margin-top: 2px;
         }
 
-        /* Status Bar */
+        /* Status Bar with more feedback */
         .status-bar {
-            background: #eee;
-            padding: 5px 15px;
-            font-size: 0.8rem;
+            background: #f0f0f0;
+            padding: 8px 15px;
+            font-size: 0.85rem;
             border-radius: 20px;
             display: inline-block;
             margin-bottom: 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
         }
+        .status-online { color: #2e7d32; background: #e8f5e9; border-color: #c8e6c9; }
+        .status-error { color: #c62828; background: #ffebee; border-color: #ffcdd2; }
 
         .notice-box {
             background-color: var(--notice-bg);
@@ -69,7 +71,6 @@
             margin-bottom: 25px;
             color: #e65100;
         }
-        .notice-box h3 { margin: 0 0 10px 0; font-size: 1.1rem; }
 
         details {
             background: white;
@@ -122,7 +123,6 @@
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.85rem;
-            line-height: 1.2;
         }
         .btn-view:hover { background-color: var(--primary-color); color: white; }
 
@@ -191,7 +191,6 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
         }
         .save-btn:hover { background-color: #b71455; }
         
@@ -199,7 +198,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255,255,255,0.8);
             display: none; justify-content: center; align-items: center; z-index: 2000;
-            font-weight: bold; color: var(--primary-color);
+            text-align: center;
         }
 
         .special-row { background-color: #fff8e1; font-weight: bold; text-align: center; }
@@ -208,31 +207,29 @@
 </head>
 <body>
 
-    <div id="loading" class="loading-overlay">⌛ 正在儲存至雲端... <br> Saving to Cloud...</div>
+    <div id="loading" class="loading-overlay">
+        <div>
+            <h2 style="color: var(--primary-color);">⌛ 正在處理 / Processing...</h2>
+            <p>正在同步雲端資料，請稍候</p>
+        </div>
+    </div>
 
     <div class="container">
         <header>
             <h1>族語報告與測驗時程表</h1>
             <span class="en-inline" style="font-size: 1.2rem;">Indigenous Language Presentation & Oral Test Schedule</span>
-            <div id="sync-status" class="status-bar">正在連接雲端資料庫... / Connecting to Database...</div>
+            <div id="sync-status" class="status-bar">🚀 系統啟動中 / System Starting...</div>
         </header>
 
         <div class="notice-box">
             <h3>💡 操作說明 / Instructions</h3>
-            <p>1. 點擊表格內的「姓名」或「組別」可直接修改。<br>
-               <span class="en-inline">Click on "Name" or "Group" in the table to edit directly.</span></p>
-            <p>2. 點擊「檢視」可修改該生的朗讀內容與音檔網址。<br>
-               <span class="en-inline">Click "View" to modify the reading content and audio link.</span></p>
-            <p>3. 所有的修改都會即時同步到雲端。<br>
-               <span class="en-inline">All changes are synchronized to the cloud in real-time.</span></p>
+            <p>1. 點擊「姓名」或「組別」可直接修改。 <span class="en-inline">Click Name/Group to edit.</span></p>
+            <p>2. 點擊「檢視」可修改內容。 <span class="en-inline">Click View to modify.</span></p>
         </div>
 
         <details open>
             <summary>
-                <div>
-                    📅 12月 19日 - 期中測驗列表
-                    <span class="en-inline">Dec 19 - Midterm Presentation List</span>
-                </div>
+                <div>📅 12月 19日 - 期中測驗列表 <span class="en-inline">Dec 19 - Midterm Presentation</span></div>
             </summary>
             <div class="table-wrapper">
                 <table>
@@ -240,10 +237,10 @@
                         <tr>
                             <th>狀態 / Status</th>
                             <th>序號 / ID</th>
-                            <th>姓名 (可點擊修改) <br> <span class="en-inline">Name (Editable)</span></th>
-                            <th>族語分組 <br> <span class="en-inline">Language Group</span></th>
-                            <th>認證級別 <br> <span class="en-inline">Cert. Level</span></th>
-                            <th>測驗題目 <br> <span class="en-inline">Exam Topic</span></th>
+                            <th>姓名 (可修改) / Name</th>
+                            <th>族語分組 / Group</th>
+                            <th>級別 / Level</th>
+                            <th>測驗內容 / Exam</th>
                             <th>時間 / Time</th>
                         </tr>
                     </thead>
@@ -262,34 +259,17 @@
             </div>
             <div class="modal-body">
                 <div id="modal-student-info" style="font-weight:bold; margin-bottom:15px; border-left: 4px solid var(--accent-color); padding-left: 10px;"></div>
-                
                 <div class="edit-area">
-                    <div class="input-group">
-                        <label>朗讀文章標題 / Reading Title <span class="en-inline">(e.g., 南勢阿美 第10階第5課)</span></label>
-                        <input type="text" id="edit-reading-desc">
-                    </div>
-                    <div class="input-group">
-                        <label>朗讀內容文字 / Reading Text Content</label>
-                        <textarea id="edit-text"></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label>音檔或學習連結 / Audio or Study URL</label>
-                        <input type="text" id="edit-url">
-                    </div>
-                    <div class="input-group">
-                        <label>看圖表達圖片網址 / Picture Topic URL</label>
-                        <input type="text" id="edit-img-url">
-                    </div>
+                    <div class="input-group"><label>文章標題 / Title</label><input type="text" id="edit-reading-desc"></div>
+                    <div class="input-group"><label>朗讀內容 / Text</label><textarea id="edit-text"></textarea></div>
+                    <div class="input-group"><label>音檔網址 / Audio URL</label><input type="text" id="edit-url"></div>
+                    <div class="input-group"><label>圖片網址 / Picture URL</label><input type="text" id="edit-img-url"></div>
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存變更 / Save Changes</button>
-                        <button class="btn-view" style="border-width: 2px;" onclick="window.open(document.getElementById('edit-url').value, '_blank')">🎧 測試音檔 / Test Audio</button>
+                        <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存 / Save</button>
+                        <button class="btn-view" onclick="window.open(document.getElementById('edit-url').value, '_blank')">🎧 測試音檔 / Test Audio</button>
                     </div>
                 </div>
-
-                <div style="text-align:center; border-top: 1px solid #ddd; padding-top: 15px;">
-                    <p style="font-size:0.85rem; color:#666; font-weight: bold;">題目預覽 / Topic Preview:</p>
-                    <img id="preview-img" src="" alt="Topic Preview">
-                </div>
+                <div style="text-align:center; padding-top: 15px;"><img id="preview-img" src="" alt="Topic Preview"></div>
             </div>
         </div>
     </div>
@@ -297,58 +277,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'indig-lang-schedule';
-
-        let user = null;
-        let studentsData = [];
-        let customContent = {};
-        let currentEditingId = null;
-
-        // --- Init & Auth ---
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) { console.error("Auth Error", err); }
-        };
-        initAuth();
-
-        onAuthStateChanged(auth, (u) => {
-            user = u;
-            if (user) {
-                document.getElementById('sync-status').innerText = "✅ 雲端已連線 / Cloud Connected";
-                loadData();
-            }
-        });
-
-        // --- Data Loading ---
-        const loadData = () => {
-            if (!user) return;
-            // Path: artifacts/appId/public/data/configs/main (6 segments)
-            const dataDoc = doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main');
-            
-            onSnapshot(dataDoc, (snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.data();
-                    studentsData = data.students || defaultStudents;
-                    customContent = data.content || {};
-                    renderTable();
-                } else {
-                    studentsData = defaultStudents;
-                    saveToCloud();
-                }
-            }, (err) => console.error("Firestore Listen Error:", err));
-        };
-
+        // --- 預設資料 (避免掛掉) ---
         const defaultStudents = [
             { id: 1, name: "林芳宇", group: "南勢阿美", langCode: "Nanshi", time: "14:10 - 14:21", level: "High-Intermediate", topic: "A" },
             { id: 2, name: "廖于寰", group: "海岸阿美", langCode: "Coastal", time: "14:21 - 14:32", level: "High-Intermediate", topic: "A" },
@@ -373,21 +304,26 @@
             C: "https://placehold.co/600x400?text=Topic+C"
         };
 
-        // --- UI Operations ---
+        let studentsData = [...defaultStudents];
+        let customContent = {};
+        let currentEditingId = null;
+        let authReady = false;
+
+        // 初始化渲染 (預設)
         window.renderTable = () => {
             const tbody = document.getElementById('midterm-tbody');
             tbody.innerHTML = studentsData.map((s, idx) => {
-                let breakRow = (idx === 8) ? `<tr class="special-row"><td colspan="7">☕ 休息 (15:38 - 15:40) / Break</td></tr>` : '';
+                let breakRow = (idx === 8) ? `<tr class="special-row"><td colspan="7">☕ 休息 (15:38 - 15:40)</td></tr>` : '';
                 return breakRow + `
                     <tr>
-                        <td><span class="badge mid">期中+口說<br><span style="font-size:0.6rem">Midterm+Oral</span></span></td>
+                        <td><span class="badge mid">期中+口說</span></td>
                         <td>${s.id}</td>
                         <td class="editable-cell" contenteditable="true" onblur="updateStudent(${s.id}, 'name', this.innerText)">${s.name}</td>
                         <td class="editable-cell" contenteditable="true" onblur="updateStudent(${s.id}, 'group', this.innerText)">${s.group}</td>
                         <td>
                              <select class="topic-selector" onchange="updateStudent(${s.id}, 'level', this.value)">
-                                <option value="Intermediate" ${s.level === 'Intermediate' ? 'selected' : ''}>中級 / Int.</option>
-                                <option value="High-Intermediate" ${s.level === 'High-Intermediate' ? 'selected' : ''}>中高級 / High-Int.</option>
+                                <option value="Intermediate" ${s.level === 'Intermediate' ? 'selected' : ''}>中級</option>
+                                <option value="High-Intermediate" ${s.level === 'High-Intermediate' ? 'selected' : ''}>中高級</option>
                             </select>
                         </td>
                         <td>
@@ -396,13 +332,79 @@
                                 <option value="B" ${s.topic === 'B' ? 'selected' : ''}>Topic B</option>
                                 <option value="C" ${s.topic === 'C' ? 'selected' : ''}>Topic C</option>
                             </select>
-                            <button class="btn-view" onclick="openEditModal(${s.id})">檢視 / 設定 <br> <span style="font-size:0.7rem">View / Set</span></button>
+                            <button class="btn-view" onclick="openEditModal(${s.id})">檢視 / 設定</button>
                         </td>
                         <td class="time-col">${s.time}</td>
                     </tr>`;
             }).join('');
         };
+        renderTable();
 
+        // --- Firebase 邏輯 ---
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'indig-lang-schedule';
+        const statusEl = document.getElementById('sync-status');
+
+        const initAuth = async () => {
+            statusEl.innerText = "🔑 正在驗證身份... / Authenticating...";
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                statusEl.innerText = "❌ 驗證失敗 / Auth Failed";
+                statusEl.className = "status-bar status-error";
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                statusEl.innerText = "🔍 正在讀取雲端資料... / Loading Data...";
+                authReady = true;
+                loadData();
+            }
+        });
+
+        const loadData = () => {
+            const dataDoc = doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main');
+            onSnapshot(dataDoc, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+                    studentsData = data.students || defaultStudents;
+                    customContent = data.content || {};
+                    renderTable();
+                    statusEl.innerText = "✅ 雲端同步中 / Cloud Synced";
+                    statusEl.className = "status-bar status-online";
+                } else {
+                    statusEl.innerText = "🆕 建立新資料庫 / Init DB";
+                    saveToCloud();
+                }
+            }, (err) => {
+                statusEl.innerText = "⚠️ 雲端連線不穩 (離線模式) / Offline Mode";
+                statusEl.className = "status-bar status-error";
+                console.error("Firestore error:", err);
+            });
+        };
+
+        const saveToCloud = async () => {
+            if (!authReady) return;
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main'), {
+                    students: studentsData,
+                    content: customContent,
+                    updatedAt: new Date().toISOString()
+                });
+            } catch (err) { console.error("Save Error:", err); }
+            finally { document.getElementById('loading').style.display = 'none'; }
+        };
+
+        // --- 視窗操作 ---
         window.updateStudent = (id, field, value) => {
             const idx = studentsData.findIndex(s => s.id === id);
             if (idx > -1 && studentsData[idx][field] !== value) {
@@ -415,62 +417,36 @@
             currentEditingId = id;
             const s = studentsData.find(st => st.id === id);
             const contentKey = `${s.id}_${s.level}`;
-            
-            const defText = (s.group.includes("南勢") && s.level === "High-Intermediate") 
-                ? "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay."
-                : "在此輸入朗讀內容... / Enter text here...";
-            
-            const defUrl = (s.group.includes("南勢") && s.level === "High-Intermediate") 
-                ? "https://web.klokah.tw/p12/lesson.php?l=1&c=10&ls=5"
-                : "https://web.klokah.tw/twelve_new/learn.php";
-
             const current = customContent[contentKey] || {
-                desc: s.group + " / " + (s.level === 'Intermediate' ? '中級' : '中高級'),
-                text: defText,
-                url: defUrl,
+                desc: s.group + " / " + s.level,
+                text: "在此輸入內容...",
+                url: "https://web.klokah.tw/twelve_new/learn.php",
                 imgUrl: defaultTopics[s.topic]
             };
-
-            document.getElementById('modal-student-info').innerHTML = `設定中 Setting for: <span style="color:var(--accent-color)">${s.name} (${s.group})</span>`;
+            document.getElementById('modal-student-info').innerText = `設定：${s.name}`;
             document.getElementById('edit-reading-desc').value = current.desc;
             document.getElementById('edit-text').value = current.text;
             document.getElementById('edit-url').value = current.url;
             document.getElementById('edit-img-url').value = current.imgUrl || defaultTopics[s.topic];
             document.getElementById('preview-img').src = current.imgUrl || defaultTopics[s.topic];
-
             document.getElementById('edit-modal').style.display = "block";
         };
 
         window.saveCurrentSettings = async () => {
             const s = studentsData.find(st => st.id === currentEditingId);
             const contentKey = `${s.id}_${s.level}`;
-            
             customContent[contentKey] = {
                 desc: document.getElementById('edit-reading-desc').value,
                 text: document.getElementById('edit-text').value,
                 url: document.getElementById('edit-url').value,
                 imgUrl: document.getElementById('edit-img-url').value
             };
-
             await saveToCloud();
             closeModal();
         };
 
-        const saveToCloud = async () => {
-            if (!user) return;
-            document.getElementById('loading').style.display = 'flex';
-            try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main'), {
-                    students: studentsData,
-                    content: customContent,
-                    updatedAt: new Date().toISOString()
-                });
-            } catch (err) { console.error("Cloud Save Error:", err); } 
-            finally { document.getElementById('loading').style.display = 'none'; }
-        };
-
         window.closeModal = () => { document.getElementById('edit-modal').style.display = "none"; };
-        window.onclick = (e) => { if (e.target == document.getElementById('edit-modal')) closeModal(); }
+        initAuth();
     </script>
 </body>
 </html>
