@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>族語(三) 報告與測驗時程表 (雲端連動版)</title>
+    <title>族語(三) 報告與測驗時程表 (進階教材版)</title>
     <style>
         :root {
             --primary-color: #00695c;
@@ -86,7 +86,7 @@
         details[open] summary { background: var(--primary-color); color: white; }
 
         .table-wrapper { overflow-x: auto; }
-        <table> width: 100%; border-collapse: collapse; min-width: 850px; }
+        table { width: 100%; border-collapse: collapse; min-width: 850px; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; vertical-align: middle; }
         th { background-color: #f9f9f9; color: #555; font-size: 0.9rem; }
         
@@ -130,7 +130,7 @@
             margin: 2% auto;
             border-radius: 12px;
             width: 90%; 
-            max-width: 750px;
+            max-width: 800px;
             max-height: 90vh;
             display: flex;
             flex-direction: column;
@@ -146,7 +146,7 @@
         
         .close-btn { font-size: 28px; cursor: pointer; }
         .modal-body { padding: 20px; overflow-y: auto; }
-        .modal-body img { max-width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd; }
+        .modal-body img { max-width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd; display: block; }
 
         .edit-area {
             background: #f0f4f8;
@@ -157,7 +157,7 @@
 
         textarea {
             width: 100%;
-            height: 120px;
+            height: 100px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -184,6 +184,18 @@
             background: rgba(255,255,255,0.8);
             display: none; justify-content: center; align-items: center; z-index: 2000;
         }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .preview-item { text-align: center; }
+        .preview-item p { font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: #555; }
 
         .special-row { background-color: #fff8e1; font-weight: bold; text-align: center; }
         .time-col { font-family: 'Courier New', monospace; font-weight: bold; color: var(--primary-color); }
@@ -237,14 +249,27 @@
             </div>
             <div class="modal-body">
                 <div id="modal-student-info" style="font-weight:bold; margin-bottom:15px; border-left: 4px solid var(--accent-color); padding-left: 10px;"></div>
+                
                 <div class="edit-area">
-                    <div class="input-group"><label>文章標題 / Title</label><input type="text" id="edit-reading-desc"></div>
-                    <div class="input-group"><label>朗讀內容文字 / Reading Text</label><textarea id="edit-text"></textarea></div>
-                    <div class="input-group"><label>音檔或學習連結 / URL</label><input type="text" id="edit-url"></div>
-                    <div class="input-group"><label>圖片網址 / Picture URL</label><input type="text" id="edit-img-url"></div>
+                    <div class="input-group"><label>朗讀標題 / Reading Title</label><input type="text" id="edit-reading-desc"></div>
+                    <div class="input-group"><label>朗讀文字內容 / Reading Text</label><textarea id="edit-text"></textarea></div>
+                    <div class="input-group"><label>朗讀音檔連結 / Audio URL</label><input type="text" id="edit-url"></div>
+                    <div class="input-group"><label>朗讀圖片網址 / Reading Image URL</label><input type="text" id="edit-reading-img-url" placeholder="課文圖片連結"></div>
+                    <div class="input-group"><label>看圖說故事網址 / Story Picture URL</label><input type="text" id="edit-story-img-url" placeholder="測驗題目圖片連結"></div>
+                    
                     <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存所有變更 / Save All</button>
                 </div>
-                <div style="text-align:center; padding-top: 15px;"><img id="preview-img" src="" alt="Preview"></div>
+
+                <div class="preview-grid">
+                    <div class="preview-item">
+                        <p>朗讀圖片預覽 / Reading Preview</p>
+                        <img id="preview-reading-img" src="" alt="Reading Preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+                    </div>
+                    <div class="preview-item">
+                        <p>看圖說故事預覽 / Story Preview</p>
+                        <img id="preview-story-img" src="" alt="Story Preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -296,7 +321,7 @@
         window.renderTable = () => {
             const tbody = document.getElementById('midterm-tbody');
             tbody.innerHTML = state.students.map((s, idx) => {
-                let breakRow = (idx === 8) ? `<tr class="special-row"><td colspan="7">☕ 休息 (15:38 - 15:40) / Break</td></tr>` : '';
+                let breakRow = (idx === 8) ? `<tr class="special-row"><td colspan="7">☕ 休息 (15:38 - 15:40)</td></tr>` : '';
                 return breakRow + `
                     <tr>
                         <td><span class="badge mid">期中+口說</span></td>
@@ -305,17 +330,17 @@
                         <td class="editable-cell" contenteditable="true" onblur="updateStudent(${s.id}, 'group', this.innerText)">${s.group}</td>
                         <td>
                              <select class="topic-selector" onchange="updateStudent(${s.id}, 'level', this.value)">
-                                <option value="Intermediate" ${s.level === 'Intermediate' ? 'selected' : ''}>中級 / Int.</option>
-                                <option value="High-Intermediate" ${s.level === 'High-Intermediate' ? 'selected' : ''}>中高級 / High.</option>
+                                <option value="Intermediate" ${s.level === 'Intermediate' ? 'selected' : ''}>中級</option>
+                                <option value="High-Intermediate" ${s.level === 'High-Intermediate' ? 'selected' : ''}>中高級</option>
                             </select>
                         </td>
                         <td>
                             <select class="topic-selector" onchange="updateStudent(${s.id}, 'topic', this.value)">
-                                <option value="A" ${s.topic === 'A' ? 'selected' : ''}>Topic A</option>
-                                <option value="B" ${s.topic === 'B' ? 'selected' : ''}>Topic B</option>
-                                <option value="C" ${s.topic === 'C' ? 'selected' : ''}>Topic C</option>
+                                <option value="A" ${s.topic === 'A' ? 'selected' : ''}>A組</option>
+                                <option value="B" ${s.topic === 'B' ? 'selected' : ''}>B組</option>
+                                <option value="C" ${s.topic === 'C' ? 'selected' : ''}>C組</option>
                             </select>
-                            <button class="btn-view" onclick="openEditModal(${s.id})">檢視 / 設定 <br> View / Set</button>
+                            <button class="btn-view" onclick="openEditModal(${s.id})">檢視 / 設定</button>
                         </td>
                         <td class="time-col">${s.time}</td>
                     </tr>`;
@@ -328,7 +353,6 @@
             if (state.authReady && state.db) {
                 document.getElementById('loading').style.display = 'flex';
                 try {
-                    // 使用 6 段路徑: artifacts / appId / public / data / configs / main
                     await setDoc(doc(state.db, 'artifacts', state.appId, 'public', 'data', 'configs', 'main'), {
                         students: state.students,
                         content: state.content,
@@ -341,7 +365,6 @@
 
         const initFirebase = async () => {
             let config = MY_FIREBASE_CONFIG;
-            // 若環境變數存在，優先使用
             if (typeof __firebase_config !== 'undefined' && __firebase_config) {
                 config = JSON.parse(__firebase_config);
                 state.appId = typeof __app_id !== 'undefined' ? __app_id : 'standalone';
@@ -378,11 +401,11 @@
                     });
                 } catch (e) {
                     console.error("Firebase init failed:", e);
-                    statusEl.innerText = "📴 離線儲存模式 (Firebase Init Fail)";
+                    statusEl.innerText = "📴 離線儲存模式";
                     statusEl.className = "status-bar status-local";
                 }
             } else {
-                statusEl.innerText = "📴 本地儲存模式 (待設定連動)";
+                statusEl.innerText = "📴 本地儲存模式";
                 statusEl.className = "status-bar status-local";
             }
         };
@@ -403,14 +426,21 @@
                 desc: s.group + " / " + s.level, 
                 text: "在此輸入內容...", 
                 url: "https://web.klokah.tw/", 
-                imgUrl: "" 
+                readingImg: "",
+                storyImg: "" 
             };
+            
             document.getElementById('modal-student-info').innerText = `正在設定：${s.name} (${s.group})`;
             document.getElementById('edit-reading-desc').value = current.desc || "";
             document.getElementById('edit-text').value = current.text || "";
             document.getElementById('edit-url').value = current.url || "";
-            document.getElementById('edit-img-url').value = current.imgUrl || "";
-            document.getElementById('preview-img').src = current.imgUrl || "";
+            document.getElementById('edit-reading-img-url').value = current.readingImg || "";
+            document.getElementById('edit-story-img-url').value = current.storyImg || "";
+            
+            // 預覽更新
+            document.getElementById('preview-reading-img').src = current.readingImg || "";
+            document.getElementById('preview-story-img').src = current.storyImg || "";
+            
             document.getElementById('edit-modal').style.display = "block";
         };
 
@@ -421,7 +451,8 @@
                 desc: document.getElementById('edit-reading-desc').value,
                 text: document.getElementById('edit-text').value,
                 url: document.getElementById('edit-url').value,
-                imgUrl: document.getElementById('edit-img-url').value
+                readingImg: document.getElementById('edit-reading-img-url').value,
+                storyImg: document.getElementById('edit-story-img-url').value
             };
             saveAll();
             closeModal();
@@ -429,6 +460,14 @@
 
         window.closeModal = () => { document.getElementById('edit-modal').style.display = "none"; };
         window.onclick = (e) => { if (e.target == document.getElementById('edit-modal')) closeModal(); }
+
+        // 即時監聽圖片欄位輸入，動態更新預覽
+        document.getElementById('edit-reading-img-url').addEventListener('input', (e) => {
+            document.getElementById('preview-reading-img').src = e.target.value;
+        });
+        document.getElementById('edit-story-img-url').addEventListener('input', (e) => {
+            document.getElementById('preview-story-img').src = e.target.value;
+        });
 
         renderTable();
         initFirebase();
