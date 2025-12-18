@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>族語(三) 報告與測驗時程表 (Bilingual & Stable Edition)</title>
+    <title>族語(三) 報告與測驗時程表 (Bilingual & Resilient Edition)</title>
     <style>
         :root {
             --primary-color: #00695c;
@@ -49,19 +49,20 @@
             margin-top: 2px;
         }
 
-        /* Status Bar with more feedback */
         .status-bar {
             background: #f0f0f0;
-            padding: 8px 15px;
+            padding: 8px 20px;
             font-size: 0.85rem;
             border-radius: 20px;
             display: inline-block;
             margin-bottom: 15px;
             border: 1px solid #ddd;
             transition: all 0.3s;
+            font-weight: bold;
         }
         .status-online { color: #2e7d32; background: #e8f5e9; border-color: #c8e6c9; }
         .status-error { color: #c62828; background: #ffebee; border-color: #ffcdd2; }
+        .status-offline { color: #555; background: #eee; border-color: #ccc; }
 
         .notice-box {
             background-color: var(--notice-bg);
@@ -126,7 +127,6 @@
         }
         .btn-view:hover { background-color: var(--primary-color); color: white; }
 
-        /* Modal */
         .modal {
             display: none; 
             position: fixed; 
@@ -209,8 +209,8 @@
 
     <div id="loading" class="loading-overlay">
         <div>
-            <h2 style="color: var(--primary-color);">⌛ 正在處理 / Processing...</h2>
-            <p>正在同步雲端資料，請稍候</p>
+            <h2 style="color: var(--primary-color);">⌛ 正在更新 / Syncing...</h2>
+            <p>正在上傳變更至雲端，請稍候</p>
         </div>
     </div>
 
@@ -218,13 +218,14 @@
         <header>
             <h1>族語報告與測驗時程表</h1>
             <span class="en-inline" style="font-size: 1.2rem;">Indigenous Language Presentation & Oral Test Schedule</span>
-            <div id="sync-status" class="status-bar">🚀 系統啟動中 / System Starting...</div>
+            <div id="sync-status" class="status-bar">🚀 正在偵測網路連線... / Initializing...</div>
         </header>
 
         <div class="notice-box">
             <h3>💡 操作說明 / Instructions</h3>
-            <p>1. 點擊「姓名」或「組別」可直接修改。 <span class="en-inline">Click Name/Group to edit.</span></p>
-            <p>2. 點擊「檢視」可修改內容。 <span class="en-inline">Click View to modify.</span></p>
+            <p>1. 直接修改名單：點擊表格中的「姓名」或「組別」即可編輯。</p>
+            <p>2. 設定測驗：點擊「檢視」修改題目、音檔連結或文章內容。</p>
+            <p>3. 雲端同步：如果連線成功，資料會自動儲存；若連線失敗，您仍可在此視窗內正常使用。</p>
         </div>
 
         <details open>
@@ -250,7 +251,6 @@
         </details>
     </div>
 
-    <!-- Modal -->
     <div id="edit-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -265,7 +265,7 @@
                     <div class="input-group"><label>音檔網址 / Audio URL</label><input type="text" id="edit-url"></div>
                     <div class="input-group"><label>圖片網址 / Picture URL</label><input type="text" id="edit-img-url"></div>
                     <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存 / Save</button>
+                        <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存並同步 / Save</button>
                         <button class="btn-view" onclick="window.open(document.getElementById('edit-url').value, '_blank')">🎧 測試音檔 / Test Audio</button>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- 預設資料 (避免掛掉) ---
+        // --- 核心資料 ---
         const defaultStudents = [
             { id: 1, name: "林芳宇", group: "南勢阿美", langCode: "Nanshi", time: "14:10 - 14:21", level: "High-Intermediate", topic: "A" },
             { id: 2, name: "廖于寰", group: "海岸阿美", langCode: "Coastal", time: "14:21 - 14:32", level: "High-Intermediate", topic: "A" },
@@ -308,8 +308,11 @@
         let customContent = {};
         let currentEditingId = null;
         let authReady = false;
+        let syncActive = false;
 
-        // 初始化渲染 (預設)
+        const statusEl = document.getElementById('sync-status');
+
+        // --- 核心渲染函數 ---
         window.renderTable = () => {
             const tbody = document.getElementById('midterm-tbody');
             tbody.innerHTML = studentsData.map((s, idx) => {
@@ -338,78 +341,93 @@
                     </tr>`;
             }).join('');
         };
+
+        // 啟動立即渲染 (本地優先)
         renderTable();
 
-        // --- Firebase 邏輯 ---
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'indig-lang-schedule';
-        const statusEl = document.getElementById('sync-status');
+        // --- Firebase 通訊 ---
+        try {
+            const firebaseConfig = JSON.parse(__firebase_config);
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'indig-lang-schedule';
 
-        const initAuth = async () => {
-            statusEl.innerText = "🔑 正在驗證身份... / Authenticating...";
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
+            // 設定超時計時器 (5秒)
+            const connTimeout = setTimeout(() => {
+                if (!syncActive) {
+                    statusEl.innerText = "📴 離線模式：雲端連線逾時 (但仍可編輯) / Offline Mode";
+                    statusEl.className = "status-bar status-offline";
                 }
-            } catch (err) {
-                statusEl.innerText = "❌ 驗證失敗 / Auth Failed";
-                statusEl.className = "status-bar status-error";
-            }
-        };
+            }, 5000);
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                statusEl.innerText = "🔍 正在讀取雲端資料... / Loading Data...";
-                authReady = true;
-                loadData();
-            }
-        });
-
-        const loadData = () => {
-            const dataDoc = doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main');
-            onSnapshot(dataDoc, (snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.data();
-                    studentsData = data.students || defaultStudents;
-                    customContent = data.content || {};
-                    renderTable();
-                    statusEl.innerText = "✅ 雲端同步中 / Cloud Synced";
-                    statusEl.className = "status-bar status-online";
-                } else {
-                    statusEl.innerText = "🆕 建立新資料庫 / Init DB";
-                    saveToCloud();
+            const initAuth = async () => {
+                statusEl.innerText = "🔑 正在連接服務... / Authenticating...";
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (err) {
+                    console.error("Auth Fail", err);
+                    statusEl.innerText = "⚠️ 無法連線至雲端伺服器 / Cloud Connection Error";
                 }
-            }, (err) => {
-                statusEl.innerText = "⚠️ 雲端連線不穩 (離線模式) / Offline Mode";
-                statusEl.className = "status-bar status-error";
-                console.error("Firestore error:", err);
+            };
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    authReady = true;
+                    loadData();
+                }
             });
-        };
 
-        const saveToCloud = async () => {
-            if (!authReady) return;
-            document.getElementById('loading').style.display = 'flex';
-            try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main'), {
-                    students: studentsData,
-                    content: customContent,
-                    updatedAt: new Date().toISOString()
+            const loadData = () => {
+                const dataDoc = doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main');
+                onSnapshot(dataDoc, (snapshot) => {
+                    syncActive = true;
+                    clearTimeout(connTimeout);
+                    if (snapshot.exists()) {
+                        const data = snapshot.data();
+                        studentsData = data.students || defaultStudents;
+                        customContent = data.content || {};
+                        renderTable();
+                        statusEl.innerText = "✅ 雲端已同步 / Cloud Online";
+                        statusEl.className = "status-bar status-online";
+                    } else {
+                        statusEl.innerText = "🆕 雲端已就緒 (初次啟動) / Cloud Ready";
+                        saveToCloud();
+                    }
+                }, (err) => {
+                    console.warn("Snapshot failed, likely offline", err);
                 });
-            } catch (err) { console.error("Save Error:", err); }
-            finally { document.getElementById('loading').style.display = 'none'; }
-        };
+            };
 
-        // --- 視窗操作 ---
+            window.saveToCloud = async () => {
+                if (!authReady) return;
+                document.getElementById('loading').style.display = 'flex';
+                try {
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main'), {
+                        students: studentsData,
+                        content: customContent,
+                        updatedAt: new Date().toISOString()
+                    });
+                } catch (err) { console.error("Save Error", err); }
+                finally { document.getElementById('loading').style.display = 'none'; }
+            };
+
+            initAuth();
+        } catch (e) {
+            statusEl.innerText = "❌ 系統執行出錯 (請確認網路) / Runtime Error";
+            statusEl.className = "status-bar status-error";
+        }
+
+        // --- 互動功能 ---
         window.updateStudent = (id, field, value) => {
             const idx = studentsData.findIndex(s => s.id === id);
             if (idx > -1 && studentsData[idx][field] !== value) {
                 studentsData[idx][field] = value;
-                saveToCloud();
+                if (authReady) saveToCloud();
             }
         };
 
@@ -417,13 +435,23 @@
             currentEditingId = id;
             const s = studentsData.find(st => st.id === id);
             const contentKey = `${s.id}_${s.level}`;
+            
+            const defText = (s.group.includes("南勢") && s.level === "High-Intermediate") 
+                ? "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay."
+                : "在此輸入內容...";
+            
+            const defUrl = (s.group.includes("南勢") && s.level === "High-Intermediate") 
+                ? "https://web.klokah.tw/p12/lesson.php?l=1&c=10&ls=5"
+                : "https://web.klokah.tw/twelve_new/learn.php";
+
             const current = customContent[contentKey] || {
                 desc: s.group + " / " + s.level,
-                text: "在此輸入內容...",
-                url: "https://web.klokah.tw/twelve_new/learn.php",
+                text: defText,
+                url: defUrl,
                 imgUrl: defaultTopics[s.topic]
             };
-            document.getElementById('modal-student-info').innerText = `設定：${s.name}`;
+
+            document.getElementById('modal-student-info').innerText = `設定測驗：${s.name} (${s.group})`;
             document.getElementById('edit-reading-desc').value = current.desc;
             document.getElementById('edit-text').value = current.text;
             document.getElementById('edit-url').value = current.url;
@@ -441,12 +469,12 @@
                 url: document.getElementById('edit-url').value,
                 imgUrl: document.getElementById('edit-img-url').value
             };
-            await saveToCloud();
+            if (authReady) await saveToCloud();
+            else alert("目前處於離線模式，變更僅暫存於此視窗。");
             closeModal();
         };
 
         window.closeModal = () => { document.getElementById('edit-modal').style.display = "none"; };
-        initAuth();
     </script>
 </body>
 </html>
