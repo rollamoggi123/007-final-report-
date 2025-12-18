@@ -478,7 +478,7 @@
     <div class="container">
         <header>
             <h1>族語(三) 期中/期末報告及口說測驗時程表<span class="en">Indigenous Language (III) Presentation & Oral Test Schedule</span></h1>
-            <div class="subtitle">更新 / Updated: 2025/12/05</div>
+            <div class="subtitle">更新 / Updated: 2025/12/18</div>
         </header>
 
         <!-- 調課公告 Notice Block -->
@@ -589,7 +589,7 @@
                     <!-- 文章圖片 -->
                     <img id="modal-reading-img" class="reading-passage-img" src="" style="display:none;" onerror="this.style.display='none'">
                     
-                    <!-- 朗讀圖片連結輸入控制 (新增) -->
+                    <!-- 朗讀圖片連結輸入控制 -->
                     <div class="link-control-area" style="background-color: #fff8e1; border-color: #ffe082;">
                         <input type="text" id="modal-reading-img-input" class="link-input" placeholder="貼上朗讀圖片網址 / Paste Reading Image URL">
                         <button class="audio-link-btn" style="background-color: #ff8f00;" onclick="updateReadingImage()">
@@ -615,7 +615,7 @@
                     <span class="en-text">Please refer to the image below for the Picture Description test.</span>
                 </p>
                 
-                <!-- 題目圖片連結輸入控制 (新增) -->
+                <!-- 題目圖片連結輸入控制 -->
                 <div class="link-control-area" style="background-color: #e8f5e9; border-color: #a5d6a7;">
                     <input type="text" id="modal-topic-img-input" class="link-input" placeholder="貼上題目圖片網址 / Paste Topic Image URL">
                     <button class="audio-link-btn" style="background-color: #2e7d32;" onclick="updateTopicImage()">
@@ -638,22 +638,19 @@
         const topics = {
             A: { 
                 code: "Topic Set A", 
-                // 👇 請在此處貼上「看圖表達」的圖片網址
                 img: "https://res.cloudinary.com/dm1ksvptk/image/upload/v1765898898/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-12-16_232600_a2yd2v.png", 
                 desc: "題目組合 A",
                 defaultText: "（這是預設文章 A...）"
             },
             B: { 
                 code: "Topic Set B", 
-                // 👇 請在此處貼上「看圖表達」的圖片網址
-                img: "./images/topic2.jpg", 
+                img: "https://placehold.co/600x400?text=Topic+B", 
                 desc: "題目組合 B",
                 defaultText: "（這是預設文章 B...）"
             },
             C: { 
                 code: "Topic Set C", 
-                // 👇 請在此處貼上「看圖表達」的圖片網址
-                img: "./images/topic3.jpg", 
+                img: "https://placehold.co/600x400?text=Topic+C", 
                 desc: "題目組合 C",
                 defaultText: "（這是預設文章 C...）"
             }
@@ -663,14 +660,26 @@
         //  2. 朗讀文章資料庫 (含連結、圖片、說明)
         // ==========================================
         const examTexts = {
-            // 南勢阿美 - 中高級
+            // 👇 修改這部分的 "Nanshi_High-Intermediate" 
             "Nanshi_High-Intermediate": {
+                // 修改文章文字
                 text: "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay.",
-                // 👇 請在此處貼上「音檔/文章」的超連結
-                url: "https://web.klokah.tw/",
+                
+                // 修改連結（族語 E 樂園）
+                url: "https://web.klokah.tw/p9/lesson.php?l=1&c=8&ls=3", 
+                
+                // 修改顯示文字：在這裡更改「中高級 / 第 8 階第 X 課」
                 readingDesc: "中高級 / 第 8 階第 3 課", 
-                // 👇 請在此處貼上「朗讀文章」的圖片網址
-                readingImg: "" 
+                
+                // 圖片路徑
+                readingImg: "images/nanshi-amis-reading-01.png" 
+            },
+
+            "Nanshi_Intermediate": {
+                text: "這是南勢阿美中級的文章範例...",
+                url: "https://web.klokah.tw/",
+                readingDesc: "中級 / 第 7 階第 1 課",
+                readingImg: "images/nanshi-amis-reading-02.png" 
             },
             
             // 預設樣板
@@ -759,10 +768,9 @@
         const modalBadge = document.getElementById('modal-badge');
         const modalText = document.getElementById('modal-text');
         
-        // 連結與說明欄位
-        const modalLinkInput = document.getElementById('modal-link-input'); // 音檔連結輸入框
-        const modalReadingImgInput = document.getElementById('modal-reading-img-input'); // 朗讀圖片連結輸入框
-        const modalTopicImgInput = document.getElementById('modal-topic-img-input'); // 題目圖片連結輸入框
+        const modalLinkInput = document.getElementById('modal-link-input'); 
+        const modalReadingImgInput = document.getElementById('modal-reading-img-input'); 
+        const modalTopicImgInput = document.getElementById('modal-topic-img-input'); 
         
         const modalStudentInfo = document.getElementById('modal-student-info');
         
@@ -771,37 +779,27 @@
 
         function openSelectedModal(studentId) {
             const student = midtermData.find(s => s.id === studentId);
-            
             const topicSelect = document.getElementById(`select-topic-${studentId}`);
             const levelSelect = document.getElementById(`select-level-${studentId}`);
             const topicKey = topicSelect.value;
             const levelKey = levelSelect.value;
-            
             const topic = topics[topicKey];
             
             modalImg.src = topic.img;
-            modalTopicImgInput.value = topic.img || ""; // 填入題目圖片網址
+            modalTopicImgInput.value = topic.img || ""; 
 
             modalBadge.innerText = `${topic.code} - ${topic.desc}`;
             modalStudentInfo.innerText = `${student.name} (${student.langCode} - ${levelKey})`;
 
-            // 智慧判斷
             const textKey = `${student.langCode}_${levelKey}`;
-            const examData = examTexts[textKey] || { text: topic.defaultText, url: "", readingDesc: "", readingImg: "" };
+            const examData = examTexts[textKey] || examTexts["default"];
 
-            // 1. 填入文字
             modalText.innerText = examData.text;
-
-            // 2. 填入音檔網址輸入框
             modalLinkInput.value = examData.url || "";
-            
-            // 3. 填入朗讀圖片網址輸入框
             modalReadingImgInput.value = examData.readingImg || "";
 
-            // 4. 處理朗讀圖片 (若有則顯示，無則隱藏)
-            updateReadingImage(); // 呼叫更新函式
+            updateReadingImage(); 
 
-            // 5. 處理朗讀說明 (若有則顯示，無則隱藏)
             if (examData.readingDesc && examData.readingDesc !== "") {
                 modalReadingDesc.innerText = examData.readingDesc;
                 modalReadingDesc.style.display = "inline-block";
@@ -812,7 +810,6 @@
             modal.style.display = "block";
         }
 
-        // 跳轉音檔函式
         function navigateToLink() {
             const url = modalLinkInput.value.trim();
             if (url) {
@@ -822,7 +819,6 @@
             }
         }
         
-        // 更新朗讀圖片函式
         function updateReadingImage() {
             const url = modalReadingImgInput.value.trim();
             if (url) {
@@ -833,7 +829,6 @@
             }
         }
 
-        // 更新題目圖片函式 (新增)
         function updateTopicImage() {
             const url = modalTopicImgInput.value.trim();
             if (url) {
