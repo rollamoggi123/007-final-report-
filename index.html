@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>族語(三) 報告與測驗時程表 (雙語版) / Schedule (Bilingual)</title>
+    <title>族語(三) 報告與測驗時程表 (雲端同步版)</title>
     <style>
         :root {
             --primary-color: #00695c;
@@ -40,26 +40,19 @@
             padding-bottom: 15px;
         }
 
-        h1 {
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 1.8rem;
-        }
-        
-        h1 .en {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: normal;
-            margin-top: 5px;
+        h1 { color: var(--primary-color); margin: 0; font-size: 1.8rem; }
+        .subtitle { color: #666; font-size: 0.9rem; margin-top: 5px; }
+
+        /* Status Bar */
+        .status-bar {
+            background: #eee;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
-        .subtitle {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        /* 公告區塊 */
         .notice-box {
             background-color: var(--notice-bg);
             border: 2px solid var(--notice-border);
@@ -68,69 +61,15 @@
             margin-bottom: 25px;
             color: #e65100;
         }
-        .notice-box h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .notice-box p {
-            margin: 5px 0;
-            font-size: 0.95rem;
-        }
-        .notice-box .en-notice {
-            color: #795548;
-            font-size: 0.85rem;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px dashed #ffe0b2;
-        }
 
-        /* 雙語文字樣式 */
-        .en-text {
-            display: block;
-            font-size: 0.85em;
-            color: #666;
-            font-weight: normal;
-            margin-top: 2px;
-        }
+        .en-text { display: block; font-size: 0.85em; color: #666; margin-top: 2px; }
         
-        /* 摘要資訊卡 */
-        .summary-card {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            flex: 1;
-            background: var(--secondary-color);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary-color);
-            min-width: 200px;
-        }
-
-        .card h3 { margin: 0 0 5px 0; font-size: 1rem; color: var(--primary-color); }
-        .card p { margin: 0; font-size: 0.9rem; }
-        .card strong { color: var(--accent-color); }
-
-        /* 交互式折疊列表 (Accordion) */
         details {
             background: white;
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
             margin-bottom: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        details[open] {
-            border-color: var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         summary {
@@ -138,136 +77,33 @@
             cursor: pointer;
             background: #fafafa;
             font-weight: bold;
-            font-size: 1.1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            list-style: none;
-            transition: background 0.2s;
         }
 
-        summary:hover {
-            background: #f0f0f0;
-        }
+        details[open] summary { background: var(--primary-color); color: white; }
 
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        details[open] summary::after {
-            content: '-';
-        }
-
-        details[open] summary {
-            background: var(--primary-color);
-            color: white;
-        }
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f9f9f9; color: #555; }
         
-        details[open] summary::after {
-            color: white;
-        }
-        
-        details[open] summary .en-text {
-            color: #e0f2f1;
+        .editable-cell:focus {
+            outline: 2px solid var(--accent-color);
+            background: #fffde7;
+            padding: 2px 5px;
         }
 
-        /* 表格樣式 */
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
-
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
-        }
-
-        th {
-            background-color: #f9f9f9;
-            color: #555;
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background-color: #f1f8e9;
-        }
-
-        /* 標籤樣式 */
         .badge {
             display: inline-block;
             padding: 3px 8px;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
         }
-
         .badge.mid { background-color: #fff3e0; color: #ef6c00; border: 1px solid #ffe0b2; }
-        .badge.final { background-color: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
         
-        .time-col {
-            font-family: 'Consolas', monospace;
-            font-weight: bold;
-            color: var(--primary-color);
-            white-space: nowrap;
-        }
-        
-        .special-row {
-            background-color: #fff8e1;
-            font-weight: bold;
-            text-align: center;
-            color: #795548;
-        }
-
-        [contenteditable="true"]:hover {
-            outline: 1px dashed #bbb;
-            background-color: #fffde7;
-            cursor: text;
-        }
-        [contenteditable="true"]:focus {
-            outline: 2px solid var(--primary-color);
-            background-color: white;
-        }
-
-        /* 下拉選單與按鈕樣式 */
-        .topic-selector {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fff;
-            font-size: 0.9rem;
-            margin-right: 5px;
-            max-width: 140px;
-        }
-        
-        .level-selector {
-            border-color: #b2dfdb;
-            background-color: #f0faff;
-            color: #00695c;
-            font-weight: 500;
-        }
-
         .btn-view {
             background-color: white;
             color: var(--primary-color);
@@ -275,27 +111,16 @@
             padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            transition: 0.2s;
         }
-        .btn-view:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
+        .btn-view:hover { background-color: var(--primary-color); color: white; }
 
-        /* Modal 樣式 */
+        /* Modal */
         .modal {
             display: none; 
             position: fixed; 
             z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
+            left: 0; top: 0; width: 100%; height: 100%; 
             background-color: rgba(0,0,0,0.6); 
             backdrop-filter: blur(5px);
         }
@@ -303,544 +128,331 @@
         .modal-content {
             background-color: #fefefe;
             margin: 2% auto;
-            padding: 0;
             border-radius: 12px;
             width: 90%; 
             max-width: 700px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            animation: slideIn 0.3s;
             max-height: 90vh;
             display: flex;
             flex-direction: column;
         }
 
-        @keyframes slideIn {
-            from {transform: translateY(-50px); opacity: 0;}
-            to {transform: translateY(0); opacity: 1;}
-        }
-
         .modal-header {
             padding: 15px 20px;
             background-color: var(--secondary-color);
-            border-bottom: 1px solid #ddd;
-            border-radius: 12px 12px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-shrink: 0;
         }
         
-        .modal-header h3 { margin: 0; color: var(--primary-color); }
+        .close-btn { font-size: 28px; cursor: pointer; }
 
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-        }
-        .close-btn:hover { color: var(--primary-color); }
+        .modal-body { padding: 20px; overflow-y: auto; }
+        .modal-body img { max-width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd; }
 
-        .modal-body {
-            padding: 20px;
-            text-align: left;
-            overflow-y: auto;
-        }
-
-        .modal-body img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            margin-top: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        /* 文章顯示區塊樣式 */
-        .text-content-box {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
+        .edit-area {
+            background: #f0f4f8;
             padding: 15px;
-            margin-bottom: 10px;
-            white-space: pre-wrap;
-            font-family: 'Segoe UI', sans-serif;
-            color: #2c3e50;
-            line-height: 1.8;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-        .text-label {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            display: block;
-            border-bottom: 2px solid #e0f2f1;
-            padding-bottom: 3px;
-        }
-        
-        /* 說明文字樣式 */
-        .reading-meta-info {
-            font-size: 0.9rem;
-            color: #d81b60;
-            font-weight: bold;
-            margin-bottom: 8px;
-            background-color: #fff0f5;
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
-        /* 朗讀圖片樣式 */
-        .reading-passage-img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        /* 連結輸入與按鈕區域 */
-        .link-control-area {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 10px;
-            align-items: center;
-            background-color: #f0faff;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #b3e5fc;
-        }
-        
-        .link-input {
-            flex: 1;
-            padding: 6px 10px;
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 0.85rem;
-            outline: none;
-        }
-        .link-input:focus {
-            border-color: var(--primary-color);
+            font-family: inherit;
+            margin-top: 5px;
+            box-sizing: border-box;
         }
 
-        .audio-link-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-weight: bold; font-size: 0.9rem; margin-bottom: 3px; }
+        .input-group input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+
+        .save-btn {
+            background-color: var(--accent-color);
             color: white;
-            text-decoration: none;
-            padding: 6px 12px;
+            padding: 10px 20px;
+            border: none;
             border-radius: 4px;
-            font-size: 0.85rem;
+            cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.2s;
-            cursor: pointer;
-            border: none;
-            white-space: nowrap;
         }
-        .audio-link-btn:hover {
-            background-color: #004d40;
-        }
-
-        .topic-badge {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
+        .save-btn:hover { background-color: #b71455; }
         
-        .modal-footer {
-            padding: 15px;
-            text-align: right;
-            border-top: 1px solid #eee;
-            flex-shrink: 0;
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.8);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
         }
-        
-        .modal-footer button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
 
+    <div id="loading" class="loading-overlay">⌛ 正在儲存至雲端...</div>
+
     <div class="container">
         <header>
-            <h1>族語(三) 期中/期末報告及口說測驗時程表<span class="en">Indigenous Language (III) Presentation & Oral Test Schedule</span></h1>
-            <div class="subtitle">更新 / Updated: 2025/12/18</div>
+            <h1>族語報告與測驗時程表<span class="en">Indig. Language Presentation Schedule</span></h1>
+            <div id="sync-status" class="status-bar">正在連接雲端資料庫...</div>
         </header>
 
-        <!-- 調課公告 Notice Block -->
         <div class="notice-box">
-            <h3>⚠️ 調課公告 / Reschedule Notice</h3>
-            <p><strong>說明：</strong>原定 <strong>12月12日</strong> 及 <strong>12月26日</strong> 之課程，調整至以下時段進行「期中及期末報告及口說測驗」。</p>
-            <div class="en-notice">
-                <strong>Note:</strong> Classes originally scheduled for <strong>Dec 12</strong> & <strong>Dec 26</strong> are rescheduled to the following dates for Midterm/Final Presentations and Oral Tests.
-            </div>
+            <h3>💡 操作說明</h3>
+            <p>1. 點擊表格內的「姓名」或「組別」可直接修改。<br>
+               2. 點擊「檢視」可修改該生的朗讀內容與音檔網址。<br>
+               3. 所有的修改都會即時同步到雲端。</p>
         </div>
 
-        <div class="summary-card">
-            <div class="card">
-                <h3>114年 12月 19日<br><span class="en-text">Dec 19, 2025</span></h3>
-                <p>🕒 14:10 開始 / Start<br>📝 期中報告及口說測驗 (1-15號)<br><span class="en-text">Midterm Presentation & Oral Test</span><br>⚡ 11 分/人 (min/person)</p>
-            </div>
-            <div class="card">
-                <h3>115年 1月 2日<br><span class="en-text">Jan 02, 2026</span></h3>
-                <p>🕒 <strong>13:10 開始 / Start</strong><br>📝 期末報告及口說測驗 (1-8號)<br><span class="en-text">Final Presentation & Oral Test</span><br>⚡ 20 分/人 (min/person)</p>
-            </div>
-            <div class="card">
-                <h3>115年 1月 9日<br><span class="en-text">Jan 09, 2026</span></h3>
-                <p>🕒 <strong>13:10 開始 / Start</strong><br>📝 期末報告及口說測驗 (9-15號)<br><span class="en-text">Final Presentation & Oral Test</span><br>⚡ 20 分/人 (min/person)</p>
-            </div>
-        </div>
-
-        <!-- 12月19日 -->
         <details open>
-            <summary>
-                <div>
-                    📅 114年 12月 19日 (14:10 開始) - 期中報告及口說測驗 (1-15號)
-                    <span class="en-text">Dec 19, 2025 (Start 14:10) - Midterm Presentation & Oral Test (No. 1-15)</span>
-                </div>
-            </summary>
+            <summary>📅 12月 19日 - 期中測驗列表</summary>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>狀態<br><span class="en-text">Status</span></th>
-                            <th>序號<br><span class="en-text">No.</span></th>
-                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
-                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
-                            <th>認證級別<br><span class="en-text">Level</span></th>
-                            <th>測驗題目 (請依方言選擇)<br><span class="en-text">Topic Select</span></th>
-                            <th>時間 (11分/人)<br><span class="en-text">Time (11m)</span></th>
+                            <th>狀態</th>
+                            <th>序號</th>
+                            <th>姓名 (可點擊修改)</th>
+                            <th>族語分組</th>
+                            <th>認證級別</th>
+                            <th>測驗題目</th>
+                            <th>時間</th>
                         </tr>
                     </thead>
-                    <tbody id="midterm-tbody">
-                        <!-- JS 將自動填入此處內容 -->
-                    </tbody>
+                    <tbody id="midterm-tbody"></tbody>
                 </table>
             </div>
         </details>
-
-        <!-- 1月2日 -->
-        <details>
-            <summary>
-                <div>
-                    📅 115年 1月 2日 (⚠️ 13:10 開始) - 期末報告及口說測驗 (1-8號)
-                    <span class="en-text">Jan 02, 2026 (Start 13:10) - Final Presentation & Oral Test (No. 1-8)</span>
-                </div>
-            </summary>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>狀態 (可編輯)<br><span class="en-text">Status (Edit)</span></th>
-                            <th>序號<br><span class="en-text">No.</span></th>
-                            <th>姓名 (可編輯)<br><span class="en-text">Name (Edit)</span></th>
-                            <th>族語分組 (可編輯)<br><span class="en-text">Language Group (Edit)</span></th>
-                            <th>時間 (20分/人)<br><span class="en-text">Time (20m)</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>1</td><td contenteditable="true">黃湘茹</td><td contenteditable="true">太魯閣<br><span class="en-text">Truku</span></td><td class="time-col">13:10 - 13:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>2</td><td contenteditable="true">廖于寰</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">13:30 - 13:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>3</td><td contenteditable="true">董韋誠</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">13:50 - 14:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>4</td><td contenteditable="true">林子嫣</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:10 - 14:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>5</td><td contenteditable="true">Malinda</td><td contenteditable="true">海岸阿美<br><span class="en-text">Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span></td><td class="time-col">14:30 - 14:50</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>6</td><td contenteditable="true">魏翔慧</td><td contenteditable="true">南勢阿美<br><span class="en-text">Amisay a Pangcah/Nanshi Amis</span></td><td class="time-col">14:50 - 15:10</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>7</td><td contenteditable="true">楊舒閑</td><td contenteditable="true">中排灣語<br><span class="en-text">C. Paiwan</span></td><td class="time-col">15:10 - 15:30</td></tr>
-                        <tr><td><span class="badge final" contenteditable="true">期末+口說<br><span class="en-text">Final+Oral</span></span></td><td>8</td><td contenteditable="true">林子嫈</td><td contenteditable="true">撒奇萊雅<br><span class="en-text">Sakizaya</span></td><td class="time-col">15:30 - 15:50</td></tr>
-                        <tr class="special-row"><td colspan="5">本日課程結束 (約 15:50)<br><span class="en-text">Class Dismissed (~15:50)</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
-
     </div>
 
-    <!-- Image Modal -->
-    <div id="image-modal" class="modal">
+    <!-- Modal -->
+    <div id="edit-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">題目詳情</h3>
+                <h3>設定測驗內容 / Exam Settings</h3>
                 <span class="close-btn" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-                <span id="modal-badge" class="topic-badge"></span>
-                <span id="modal-student-info" style="display:block; font-size: 0.8rem; color: #666; margin-bottom: 5px;"></span>
+                <div id="modal-student-info" style="font-weight:bold; margin-bottom:10px;"></div>
                 
-                <!-- 文章顯示區域 -->
-                <div class="text-content-box">
-                    <span class="text-label">朗讀文章 / Reading Passage:</span>
-                    <!-- 說明欄位 (階級/課數) -->
-                    <p id="modal-reading-desc" class="reading-meta-info"></p>
-                    
-                    <!-- 文章圖片 -->
-                    <img id="modal-reading-img" class="reading-passage-img" src="" style="display:none;" onerror="this.style.display='none'">
-                    
-                    <!-- 朗讀圖片連結輸入控制 -->
-                    <div class="link-control-area" style="background-color: #fff8e1; border-color: #ffe082;">
-                        <input type="text" id="modal-reading-img-input" class="link-input" placeholder="貼上朗讀圖片網址 / Paste Reading Image URL">
-                        <button class="audio-link-btn" style="background-color: #ff8f00;" onclick="updateReadingImage()">
-                            🖼️ 顯示 Show
-                        </button>
+                <div class="edit-area">
+                    <div class="input-group">
+                        <label>朗讀文章標題 (如：南勢阿美 第10階第5課)</label>
+                        <input type="text" id="edit-reading-desc">
                     </div>
-
-                    <span id="modal-text"></span>
-                </div>
-                
-                <!-- 音檔網址輸入與跳轉按鈕 -->
-                <div class="link-control-area">
-                    <input type="text" id="modal-link-input" class="link-input" placeholder="請輸入音檔連結 / Paste Audio Link...">
-                    <button id="modal-link-btn" class="audio-link-btn" onclick="navigateToLink()">
-                        🎧 前往 Go
-                    </button>
-                </div>
-
-                <div style="border-top: 1px dashed #ddd; margin: 15px 0;"></div>
-
-                <span class="text-label">看圖表達 / Picture Description:</span>
-                <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
-                    <span class="en-text">Please refer to the image below for the Picture Description test.</span>
-                </p>
-                
-                <!-- 題目圖片連結輸入控制 -->
-                <div class="link-control-area" style="background-color: #e8f5e9; border-color: #a5d6a7;">
-                    <input type="text" id="modal-topic-img-input" class="link-input" placeholder="貼上題目圖片網址 / Paste Topic Image URL">
-                    <button class="audio-link-btn" style="background-color: #2e7d32;" onclick="updateTopicImage()">
-                        🖼️ 顯示 Show
-                    </button>
+                    <div class="input-group">
+                        <label>朗讀內容文字</label>
+                        <textarea id="edit-text"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>音檔/學習連結 URL</label>
+                        <input type="text" id="edit-url">
+                    </div>
+                    <div class="input-group">
+                        <label>看圖表達圖片 URL (如不修改請保持原樣)</label>
+                        <input type="text" id="edit-img-url">
+                    </div>
+                    <button class="save-btn" onclick="saveCurrentSettings()">💾 儲存所有變更</button>
+                    <button class="btn-view" style="margin-left:10px;" onclick="window.open(document.getElementById('edit-url').value, '_blank')">🎧 測試音檔</button>
                 </div>
 
-                <img id="modal-img" src="" alt="Topic Image" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Image+Not+Found';">
-            </div>
-            <div class="modal-footer">
-                <button onclick="closeModal()">確認 OK</button>
+                <div style="text-align:center;">
+                    <p style="font-size:0.8rem; color:#666;">預覽看圖題目：</p>
+                    <img id="preview-img" src="" alt="Preview">
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // ==========================================
-        //  1. 圖片組合 (Topic Set)
-        // ==========================================
-        const topics = {
-            A: { 
-                code: "Topic Set A", 
-                img: "https://res.cloudinary.com/dm1ksvptk/image/upload/v1765898898/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-12-16_232600_a2yd2v.png", 
-                desc: "題目組合 A",
-                defaultText: "（這是預設文章 A...）"
-            },
-            B: { 
-                code: "Topic Set B", 
-                img: "https://placehold.co/600x400?text=Topic+B", 
-                desc: "題目組合 B",
-                defaultText: "（這是預設文章 B...）"
-            },
-            C: { 
-                code: "Topic Set C", 
-                img: "https://placehold.co/600x400?text=Topic+C", 
-                desc: "題目組合 C",
-                defaultText: "（這是預設文章 C...）"
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Config
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'indig-lang-schedule';
+
+        let user = null;
+        let studentsData = [];
+        let customContent = {}; // 存放不同學生+級別的自定義內容
+        let currentEditingId = null;
+
+        // --- 初始化與認證 ---
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Auth Error", err);
             }
         };
+        initAuth();
 
-        // ==========================================
-        //  2. 朗讀文章資料庫 (含連結、圖片、說明)
-        // ==========================================
-        const examTexts = {
-            "Nanshi_High-Intermediate": {
-                text: "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay.",
-                // ✅ 網址保留如下
-                url: "https://web.klokah.tw/p9/lesson.php?l=1&c=8&ls=3", 
-                // ✅ 修改為第 10 階第 5 課
-                readingDesc: "中高級 / 第 10 階第 5 課", 
-                readingImg: "images/nanshi-amis-reading-01.png" 
-            },
+        onAuthStateChanged(auth, (u) => {
+            user = u;
+            if (user) {
+                document.getElementById('sync-status').innerText = "✅ 雲端連線成功";
+                loadData();
+            }
+        });
 
-            "Nanshi_Intermediate": {
-                text: "這是南勢阿美中級的文章範例...",
-                url: "https://web.klokah.tw/",
-                readingDesc: "中級 / 第 7 階第 1 課",
-                readingImg: "images/nanshi-amis-reading-02.png" 
-            },
+        // --- 資料讀取與監聽 ---
+        const loadData = () => {
+            if (!user) return;
+            // 重要修復：Firestore 文件路徑必須是偶數段。
+            // 原本：artifacts / appId / public / data / main_config (5段) -> 報錯
+            // 現改為：artifacts / appId / public / data / configs / main (6段) -> 正確
+            const dataDoc = doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main');
             
-            // 預設樣板
-            "default": {
-                text: "（尚未設定此語別文章，請依圖片進行測驗）",
-                url: "",
-                readingDesc: "級別 / 課數待定",
-                readingImg: "" 
-            }
+            onSnapshot(dataDoc, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+                    studentsData = data.students || defaultStudents;
+                    customContent = data.content || {};
+                    renderTable();
+                } else {
+                    // 第一次使用，儲存預設值
+                    studentsData = defaultStudents;
+                    saveToCloud();
+                }
+            }, (err) => console.error(err));
         };
 
-        // 3. 定義 12/19 學生資料
-        const midtermData = [
-            { id: 1, name: "林芳宇", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "14:10 - 14:21", level: "High-Intermediate" },
-            { id: 2, name: "廖于寰", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:21 - 14:32", level: "High-Intermediate" },
-            { id: 3, name: "董韋誠", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:32 - 14:43", level: "High-Intermediate" },
-            { id: 4, name: "林子嫣", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:43 - 14:54", level: "Intermediate" },
-            { id: 5, name: "Malinda", group: "海岸阿美<br><span class='en-text'>Pasawalian 'Amis/ Hainan  'Amis/Coastal  'Amis</span>", langCode: "Coastal", time: "14:54 - 15:05", level: "High-Intermediate", customStatus: "對話測驗", customStatusEn: "Conversation" },
-            { id: 6, name: "魏翔慧", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "15:05 - 15:16", level: "High-Intermediate" },
-            { id: 7, name: "黃湘茹", group: "太魯閣<br><span class='en-text'>Truku</span>", langCode: "Truku", time: "15:16 - 15:27", level: "High-Intermediate" },
-            { id: 8, name: "林子嫈", group: "撒奇萊雅<br><span class='en-text'>Sakizaya</span>", langCode: "Sakizaya", time: "15:27 - 15:38", level: "High-Intermediate" },
-            // Break
-            { id: 9, name: "林詩晨", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "15:40 - 15:51", level: "High-Intermediate" },
-            { id: 10, name: "王妤君", group: "秀姑巒阿美<br><span class='en-text'>Siwkolang 'Amis</span>", langCode: "Siwkolang", time: "15:51 - 16:02", level: "High-Intermediate" },
-            { id: 11, name: "余晨儀", group: "南勢阿美<br><span class='en-text'>Amisay a Pangcah/Nanshi Amis</span>", langCode: "Nanshi", time: "16:02 - 16:13", level: "High-Intermediate" },
-            { id: 12, name: "呂頌恩", group: "北排灣<br><span class='en-text'>N. Paiwan</span>", langCode: "Paiwan", time: "16:13 - 16:24", level: "High-Intermediate" },
-            { id: 13, name: "楊舒閑", group: "中排灣語<br><span class='en-text'>C. Paiwan</span>", langCode: "Paiwan", time: "16:24 - 16:35", level: "High-Intermediate" },
-            { id: 14, name: "蘇邱立宏", group: "郡群布農語<br><span class='en-text'>Bunun</span>", langCode: "Bunun", time: "16:35 - 16:46", level: "Intermediate" },
-            { id: 15, name: "胡弘易", group: "郡群布農語<br><span class='en-text'>Bunun</span>", langCode: "Bunun", time: "16:46 - 16:57", level: "High-Intermediate" }
+        const defaultStudents = [
+            { id: 1, name: "林芳宇", group: "南勢阿美", langCode: "Nanshi", time: "14:10 - 14:21", level: "High-Intermediate", topic: "A" },
+            { id: 2, name: "廖于寰", group: "海岸阿美", langCode: "Coastal", time: "14:21 - 14:32", level: "High-Intermediate", topic: "A" },
+            { id: 3, name: "董韋誠", group: "海岸阿美", langCode: "Coastal", time: "14:32 - 14:43", level: "High-Intermediate", topic: "A" },
+            { id: 4, name: "林子嫣", group: "海岸阿美", langCode: "Coastal", time: "14:43 - 14:54", level: "Intermediate", topic: "A" },
+            { id: 5, name: "Malinda", group: "海岸阿美", langCode: "Coastal", time: "14:54 - 15:05", level: "High-Intermediate", topic: "A" },
+            { id: 6, name: "魏翔慧", group: "南勢阿美", langCode: "Nanshi", time: "15:05 - 15:16", level: "High-Intermediate", topic: "B" },
+            { id: 7, name: "黃湘茹", group: "太魯閣", langCode: "Truku", time: "15:16 - 15:27", level: "High-Intermediate", topic: "B" },
+            { id: 8, name: "林子嫈", group: "撒奇萊雅", langCode: "Sakizaya", time: "15:27 - 15:38", level: "High-Intermediate", topic: "B" },
+            { id: 9, name: "林詩晨", group: "南勢阿美", langCode: "Nanshi", time: "15:40 - 15:51", level: "High-Intermediate", topic: "B" },
+            { id: 10, name: "王妤君", group: "秀姑巒阿美", langCode: "Siwkolang", time: "15:51 - 16:02", level: "High-Intermediate", topic: "B" },
+            { id: 11, name: "余晨儀", group: "南勢阿美", langCode: "Nanshi", time: "16:02 - 16:13", level: "High-Intermediate", topic: "C" },
+            { id: 12, name: "呂頌恩", group: "北排灣", langCode: "Paiwan", time: "16:13 - 16:24", level: "High-Intermediate", topic: "C" },
+            { id: 13, name: "楊舒閑", group: "中排灣語", langCode: "Paiwan", time: "16:24 - 16:35", level: "High-Intermediate", topic: "C" },
+            { id: 14, name: "蘇邱立宏", group: "郡群布農語", langCode: "Bunun", time: "16:35 - 16:46", level: "Intermediate", topic: "C" },
+            { id: 15, name: "胡弘易", group: "郡群布農語", langCode: "Bunun", time: "16:46 - 16:57", level: "High-Intermediate", topic: "C" }
         ];
 
-        // 4. 渲染 12/19 表格
-        function renderMidterm() {
+        const defaultTopics = {
+            A: "https://res.cloudinary.com/dm1ksvptk/image/upload/v1765898898/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-12-16_232600_a2yd2v.png",
+            B: "https://placehold.co/600x400?text=Topic+B",
+            C: "https://placehold.co/600x400?text=Topic+C"
+        };
+
+        // --- 介面操作 ---
+        window.renderTable = () => {
             const tbody = document.getElementById('midterm-tbody');
-            let html = '';
-
-            midtermData.forEach((student, index) => {
-                let defaultTopic = 'A';
-                if (student.id >= 6 && student.id <= 10) defaultTopic = 'B';
-                if (student.id >= 11) defaultTopic = 'C';
-
-                if (index === 8) {
-                    html += `<tr class="special-row"><td colspan="7">換場 / 休息 (15:38 - 15:40)<br><span class="en-text">Transition / Break</span></td></tr>`;
-                }
-
-                const statusText = student.customStatus || "期中+口說";
-                const statusEn = student.customStatusEn || "Midterm+Oral";
-
-                html += `
+            tbody.innerHTML = studentsData.map((s, idx) => {
+                let breakRow = (idx === 8) ? `<tr class="special-row"><td colspan="7">☕ 休息 (15:38 - 15:40)</td></tr>` : '';
+                return breakRow + `
                     <tr>
-                        <td><span class="badge mid" contenteditable="true">${statusText}<br><span class="en-text">${statusEn}</span></span></td>
-                        <td>${student.id}</td>
-                        <td contenteditable="true">${student.name}</td>
-                        <td contenteditable="true">${student.group}</td>
+                        <td><span class="badge mid">期中+口說</span></td>
+                        <td>${s.id}</td>
+                        <td class="editable-cell" contenteditable="true" onblur="updateStudent(${s.id}, 'name', this.innerText)">${s.name}</td>
+                        <td class="editable-cell" contenteditable="true" onblur="updateStudent(${s.id}, 'group', this.innerText)">${s.group}</td>
                         <td>
-                             <select id="select-level-${student.id}" class="topic-selector level-selector">
-                                <option value="Novice" ${student.level === 'Novice' ? 'selected' : ''}>初級 / Novice</option>
-                                <option value="Intermediate" ${student.level === 'Intermediate' ? 'selected' : ''}>中級 / Intermediate</option>
-                                <option value="High-Intermediate" ${student.level === 'High-Intermediate' ? 'selected' : ''}>中高級 / High-Int.</option>
+                             <select class="topic-selector" onchange="updateStudent(${s.id}, 'level', this.value)">
+                                <option value="Intermediate" ${s.level === 'Intermediate' ? 'selected' : ''}>中級</option>
+                                <option value="High-Intermediate" ${s.level === 'High-Intermediate' ? 'selected' : ''}>中高級</option>
                             </select>
                         </td>
                         <td>
-                            <div style="display: flex; align-items: center;">
-                                <select id="select-topic-${student.id}" class="topic-selector">
-                                    <option value="A" ${defaultTopic === 'A' ? 'selected' : ''}>題目 A</option>
-                                    <option value="B" ${defaultTopic === 'B' ? 'selected' : ''}>題目 B</option>
-                                    <option value="C" ${defaultTopic === 'C' ? 'selected' : ''}>題目 C</option>
-                                </select>
-                                <button class="btn-view" onclick="openSelectedModal(${student.id})">
-                                    檢視 View
-                                </button>
-                            </div>
+                            <select class="topic-selector" onchange="updateStudent(${s.id}, 'topic', this.value)">
+                                <option value="A" ${s.topic === 'A' ? 'selected' : ''}>A</option>
+                                <option value="B" ${s.topic === 'B' ? 'selected' : ''}>B</option>
+                                <option value="C" ${s.topic === 'C' ? 'selected' : ''}>C</option>
+                            </select>
+                            <button class="btn-view" onclick="openEditModal(${s.id})">檢視 / 設定</button>
                         </td>
-                        <td class="time-col">${student.time}</td>
-                    </tr>
-                `;
-            });
+                        <td class="time-col">${s.time}</td>
+                    </tr>`;
+            }).join('');
+        };
+
+        window.updateStudent = (id, field, value) => {
+            const idx = studentsData.findIndex(s => s.id === id);
+            if (idx > -1 && studentsData[idx][field] !== value) {
+                studentsData[idx][field] = value;
+                saveToCloud();
+            }
+        };
+
+        window.openEditModal = (id) => {
+            currentEditingId = id;
+            const s = studentsData.find(st => st.id === id);
+            const contentKey = `${s.id}_${s.level}`; // 以 學生ID_級別 作為自定義內容的 Key
             
-            html += `<tr class="special-row"><td colspan="7">本日課程結束 (約 17:00)<br><span class="en-text">Class Dismissed (~17:00)</span></td></tr>`;
-            tbody.innerHTML = html;
-        }
-
-        // 5. Modal 控制
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalBadge = document.getElementById('modal-badge');
-        const modalText = document.getElementById('modal-text');
-        
-        const modalLinkInput = document.getElementById('modal-link-input'); 
-        const modalReadingImgInput = document.getElementById('modal-reading-img-input'); 
-        const modalTopicImgInput = document.getElementById('modal-topic-img-input'); 
-        
-        const modalStudentInfo = document.getElementById('modal-student-info');
-        
-        const modalReadingDesc = document.getElementById('modal-reading-desc');
-        const modalReadingImg = document.getElementById('modal-reading-img');
-
-        function openSelectedModal(studentId) {
-            const student = midtermData.find(s => s.id === studentId);
-            const topicSelect = document.getElementById(`select-topic-${studentId}`);
-            const levelSelect = document.getElementById(`select-level-${studentId}`);
-            const topicKey = topicSelect.value;
-            const levelKey = levelSelect.value;
-            const topic = topics[topicKey];
+            // 預設內容
+            const defText = (s.group.includes("南勢") && s.level === "High-Intermediate") 
+                ? "Adihay ku kasarumaruma nu lusay tina sepat nu palaedan. U kaveneran a palaedan i kacanglahan, u kaurauradan tu a remiamiad, kapah ku maluvic nu kilang, adihay ku langaw, u lalupela, adeci, u tevu’ nu tukus, u milaladay a dateng i, u runi, u kakurut, u lumingay."
+                : "請在此輸入自定義朗讀文字...";
             
-            modalImg.src = topic.img;
-            modalTopicImgInput.value = topic.img || ""; 
+            const defUrl = (s.group.includes("南勢") && s.level === "High-Intermediate") 
+                ? "https://web.klokah.tw/p12/lesson.php?l=1&c=10&ls=5"
+                : "https://web.klokah.tw/twelve_new/learn.php";
 
-            modalBadge.innerText = `${topic.code} - ${topic.desc}`;
-            modalStudentInfo.innerText = `${student.name} (${student.langCode} - ${levelKey})`;
+            const current = customContent[contentKey] || {
+                desc: s.group + " / " + (s.level === 'Intermediate' ? '中級' : '中高級'),
+                text: defText,
+                url: defUrl,
+                imgUrl: defaultTopics[s.topic]
+            };
 
-            const textKey = `${student.langCode}_${levelKey}`;
-            const examData = examTexts[textKey] || examTexts["default"];
+            document.getElementById('modal-student-info').innerText = `正在設定：${s.name} (${s.group})`;
+            document.getElementById('edit-reading-desc').value = current.desc;
+            document.getElementById('edit-text').value = current.text;
+            document.getElementById('edit-url').value = current.url;
+            document.getElementById('edit-img-url').value = current.imgUrl || defaultTopics[s.topic];
+            document.getElementById('preview-img').src = current.imgUrl || defaultTopics[s.topic];
 
-            modalText.innerText = examData.text;
-            modalLinkInput.value = examData.url || "";
-            modalReadingImgInput.value = examData.readingImg || "";
+            document.getElementById('edit-modal').style.display = "block";
+        };
 
-            updateReadingImage(); 
-
-            if (examData.readingDesc && examData.readingDesc !== "") {
-                modalReadingDesc.innerText = examData.readingDesc;
-                modalReadingDesc.style.display = "inline-block";
-            } else {
-                modalReadingDesc.style.display = "none";
-            }
+        window.saveCurrentSettings = async () => {
+            const s = studentsData.find(st => st.id === currentEditingId);
+            const contentKey = `${s.id}_${s.level}`;
             
-            modal.style.display = "block";
-        }
+            customContent[contentKey] = {
+                desc: document.getElementById('edit-reading-desc').value,
+                text: document.getElementById('edit-text').value,
+                url: document.getElementById('edit-url').value,
+                imgUrl: document.getElementById('edit-img-url').value
+            };
 
-        function navigateToLink() {
-            const url = modalLinkInput.value.trim();
-            if (url) {
-                window.open(url, '_blank');
-            } else {
-                alert("請先輸入網址！\nPlease enter a URL first.");
+            await saveToCloud();
+            closeModal();
+        };
+
+        const saveToCloud = async () => {
+            if (!user) return;
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                // 修復後的對應路徑
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configs', 'main'), {
+                    students: studentsData,
+                    content: customContent,
+                    updatedAt: new Date().toISOString()
+                });
+            } catch (err) {
+                console.error("Save failed", err);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
             }
-        }
-        
-        function updateReadingImage() {
-            const url = modalReadingImgInput.value.trim();
-            if (url) {
-                modalReadingImg.src = url;
-                modalReadingImg.style.display = 'block';
-            } else {
-                modalReadingImg.style.display = 'none';
-            }
-        }
+        };
 
-        function updateTopicImage() {
-            const url = modalTopicImgInput.value.trim();
-            if (url) {
-                modalImg.src = url;
-            }
-        }
-
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        renderMidterm();
+        window.closeModal = () => { document.getElementById('edit-modal').style.display = "none"; };
     </script>
 </body>
 </html>
